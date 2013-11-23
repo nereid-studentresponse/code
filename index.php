@@ -1,65 +1,34 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
-    <head>
-        <title>International project</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-		
-		<!-- CSS -->
-		<link rel="stylesheet" href="./css/layout.css">
-		
-		<!-- Javascript -->
-		
-		
-    </head>
-    <body>
-		<?php
-			if (isset($_POST['mot_de_passe']) AND $_POST['login'] ==  "international" AND $_POST['password'] == "project") // if password is ok
-			{
-				// redirection
-				
-			}
-			else // display the welcome page
-			{
-			
-		?>
-		<div id="bloc_page">
-			<div id="header">
-				<img src="./css/images/small_globe.png" alt="International" />
-				<h2>International project prototype : welcome !</h2>
-			</div>
-			
-			<div id="content">
-				<div id="authentication">
-					<form action="index.php" method="post">
-						<fieldset>
-							<legend> Please login here : </legend>
-							<label for="login" class="inline">Login :</label>
-							<input type="text" name="login" />
-							<label for="password" class="inline">Password :</label>
-							<input type="password" name="password" />
-							<input type="submit" value="Enter" />
-						</fieldset>
-					</form>
-					<p>Not registered yet ? <a href="#">Create an account here</a> to explore this fabulous prototype !</p>
-				</div>
-				
-				<div id="websitePresentation">
-					<fieldset>
-						<legend> About the website : </legend>
-						<p>This website is a prototype realised by three chilean students and two french students, as part of their courses in the 
-						Conception University and the INSA Lyon School.</p>
-						<p>It is an <span class="bold">interactive web-based system</span> for helping teachers on engaging students on theirs courses. With this website, teachers can create and manage courses, 
-						lessons and questions related to their program, and students can follow lessons, take notes and answer questions.</p>
-						<p>Enjoy this new educational tool !</p>
-					</fieldset>
-				</div>
-			
-			</div>
-		</div>
-		
-		<?php
-			}
-		?>
-		
-    </body>
-</html>
+<?php
+	session_start();
+	header('Content-type: text/html; charset=utf-8');
+	
+	if ( isset($_SESSION['login']) )
+	{
+		$error = "<p>You are already connected with pseudo <span class='bold'>" . htmlspecialchars($_SESSION['login'], ENT_QUOTES)."</span></p>";
+    
+		require_once('viewIndexConnected.php');
+		exit();
+	}
+	else if ( isset($_POST['login']) ) // if the request is a post one
+	{
+		if ( $_POST['login'] ==  "international" AND $_POST['password'] == "project" ) // if password is ok
+		{	
+			$_SESSION['login'] = $_POST['login'];
+            $_SESSION['password'] = $_POST['password'];
+            unset($_SESSION['connexion_login']);
+
+			// redirection
+			header('Location: courses.php');
+		} else {
+			$_SESSION['connexion_login'] = $_POST['login'];
+			$error = "<p>Login and password unknown. Please retry.</p>";
+			require_once('viewIndex.php');
+		}
+	}
+	else // display the welcome page
+	{
+		$error = "";
+		require_once('viewIndex.php');
+	}
+	
+?>
