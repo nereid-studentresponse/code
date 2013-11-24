@@ -13,7 +13,7 @@
     <body>
 	
 		<div id="bloc_page">
-			<?php require_once("menu.php"); ?>
+			<?php require_once("header.php"); ?>
 			
 			<div id="content">
 			
