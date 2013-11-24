@@ -31,7 +31,7 @@
 							<input type="submit" value="Enter" />
 						</fieldset>
 					</form>
-					<p>Not registered yet ? <a href="#">Create an account here</a> to explore this fabulous prototype !</p>
+					<p>Not registered yet ? <a href="register.php">Create an account here</a> to explore this fabulous prototype !</p>
 				</div>
 				
 				<div id="websitePresentation">

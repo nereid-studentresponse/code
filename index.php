@@ -6,7 +6,7 @@
 	{
 		$error = "<p>You are already connected with pseudo <span class='bold'>" . htmlspecialchars($_SESSION['login'], ENT_QUOTES)."</span></p>";
     
-		require_once('viewIndexConnected.php');
+		require_once('indexConnectedView.php');
 		exit();
 	}
 	else if ( isset($_POST['login']) ) // if the request is a post one
@@ -22,13 +22,13 @@
 		} else {
 			$_SESSION['connexion_login'] = $_POST['login'];
 			$error = "<p>Login and password unknown. Please retry.</p>";
-			require_once('viewIndex.php');
+			require_once('indexView.php');
 		}
 	}
 	else // display the welcome page
 	{
 		$error = "";
-		require_once('viewIndex.php');
+		require_once('indexView.php');
 	}
 	
 ?>

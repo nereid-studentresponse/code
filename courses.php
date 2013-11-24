@@ -1,1 +1,1 @@
-<?php require_once("viewCourses.php"); ?>
+<?php require_once("coursesView.php"); ?>

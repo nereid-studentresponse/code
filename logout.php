@@ -6,6 +6,6 @@
 	
 	$informations = "You are now logged out. To log in, <a href='index.php'>click here</a>";
 	
-	require_once('viewLogout.php');
+	require_once('logoutView.php');
 	exit();
 ?>
