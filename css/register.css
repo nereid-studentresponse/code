@@ -1,0 +1,70 @@
+#content {
+	margin-top: 10px!important;
+}
+
+form {
+	margin: auto;
+	max-width: 450px;
+}
+
+label {
+	margin-top: 20px;
+	display: inline-block;
+	width: 150px;
+	text-align: left;
+}
+
+fieldset {
+	border: none;
+}
+
+legend {
+	border-bottom: 2px dashed #FF6633;
+	text-align: center;
+	width: 100%;
+}
+
+input {
+	background-color:#FFF3F3;
+	padding: 3px;
+	border: 1px solid #F5C5C5;
+	border-radius: 5px;
+	width: 250px;
+	margin: 5px auto;
+	box-shadow: 1px 1px 2px #FF9966 inset;
+}
+
+select {
+	width: 250px;
+}
+
+.radio {
+	width: 250px;
+	display: inline-block;
+	text-align: left;
+}
+
+.formBlock {
+	display: block;
+}
+
+#statusLabel label {
+	vertical-align: top;
+}
+
+input[type=radio] {
+	width: auto;
+	margin-right : 5px;
+}
+ 
+input[type=submit] {
+	width: 100px;
+	display: block;
+	box-shadow: 1px 1px 1px #FF9966;
+	cursor: pointer;
+}
+
+input[type=submit]:hover {
+	background-color: #EF8956!important;
+	color: white;
+}
