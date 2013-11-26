@@ -21,6 +21,12 @@ class StudentDAO {
    //> EXECUTE HERE PDO
   }
 
+  function insert($student) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare('INSERT INTO student (\'id\',\'name\',\'yearofstudy\',\'confused\') VALUES ('.$student->getId().', '.$student->getName().', '.$student->getYearOfStudy().','.$student->isConfused().');');
+    $query->execute(); 
+  }
+
   function listAll() {
     echo "<br>Listiiiiing<br>";
     
@@ -34,7 +40,7 @@ class StudentDAO {
     $arrayCounter = 0;
     
     foreach ($result as &$row) {
-      $tempStudent = new Student($row['id'], $row['name'], $row['yearofstudy'], $row['cofnused']);
+      $tempStudent = new Student($row['id'], $row['name'], $row['yearofstudy'], $row['confused']);
       $studentArray[$arrayCounter] = $tempStudent;
       $arrayCounter++;
     }

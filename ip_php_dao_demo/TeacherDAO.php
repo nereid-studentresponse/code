@@ -21,6 +21,12 @@ class TeaherDAO {
    //> EXECUTE HERE PDO
   }
 
+  function insert($teacher) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare('INSERT INTO teacher (\'id\',\'name\',\'speciality\') VALUES ('.$teacher->getId().', '.$teacher->getName().', '.$teacher->getSpeciality().');');
+    $query->execute(); 
+  }
+
   function listAll() {
     echo "<br>Listiiiiing<br>";
     
