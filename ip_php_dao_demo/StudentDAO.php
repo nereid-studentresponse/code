@@ -27,6 +27,12 @@ class StudentDAO {
     $query->execute(); 
   }
 
+  function update($student) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare('UPDATE student SET name='.$student->getName().',yearofstudy='.$student->getYearOfStudy().', confused='.$student->isConfused().'WHERE id='.$student->getId().';');
+    $query->execute(); 
+  }
+
   function delete($student) {
     $dbConnection=$this->dbConnect();
     $query=$dbConnection->prepare('DELETE FROM student WHERE id='.$student->getId().';');

@@ -27,6 +27,12 @@ class TeaherDAO {
     $query->execute(); 
   }
 
+  function update($teacher) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare('UPDATE teacher SET name='.$teacher->getName().',speciality='.$teacher->getSpeciality().'WHERE id='.$teacher->getId().';');
+    $query->execute(); 
+  }
+
   function delete($teacher) {
     $dbConnection=$this->dbConnect();
     $query=$dbConnection->prepare('DELETE FROM teacher WHERE id='.$teacher->getId().';');
