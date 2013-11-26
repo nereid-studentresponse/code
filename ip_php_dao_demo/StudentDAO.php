@@ -25,7 +25,7 @@ class StudentDAO {
     echo "<br>Listiiiiing<br>";
     
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare("SELECT * FROM students ");
+    $query=$dbConnection->prepare("SELECT * FROM student ");
     $query->execute();
     $result=$query->fetchAll();
     
@@ -34,7 +34,7 @@ class StudentDAO {
     $arrayCounter = 0;
     
     foreach ($result as &$row) {
-      $tempStudent = new Student($row['id'], $row['name']);
+      $tempStudent = new Student($row['id'], $row['name'], $row['yearofstudy'], $row['cofnused']);
       $studentArray[$arrayCounter] = $tempStudent;
       $arrayCounter++;
     }
