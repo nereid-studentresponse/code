@@ -27,6 +27,12 @@ class StudentDAO {
     $query->execute(); 
   }
 
+  function delete($student) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare('DELETE FROM student WHERE id='.$student->getId().';');
+    $query->execute(); 
+  }
+
   function listAll() {
     echo "<br>Listiiiiing<br>";
     
