@@ -18,14 +18,37 @@ class StudentDAO {
   }
 
   function get($id) {
-   //> EXECUTE HERE PDO
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("SELECT * FROM student WHERE id=".$id);
+    $query->execute();
+    $result=$query->fetchAll();
+
+    return new Student($result[0]);
+  }
+
+  function insert($student) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare('INSERT INTO student (\'id\',\'name\',\'yearofstudy\',\'confused\') VALUES ('.$student->getId().', '.$student->getName().', '.$student->getYearOfStudy().','.$student->isConfused().');');
+    $query->execute(); 
+  }
+
+  function update($student) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare('UPDATE student SET name='.$student->getName().',yearofstudy='.$student->getYearOfStudy().', confused='.$student->isConfused().'WHERE id='.$student->getId().';');
+    $query->execute(); 
+  }
+
+  function delete($student) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare('DELETE FROM student WHERE id='.$student->getId().';');
+    $query->execute(); 
   }
 
   function listAll() {
     echo "<br>Listiiiiing<br>";
     
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare("SELECT * FROM students ");
+    $query=$dbConnection->prepare("SELECT * FROM student ");
     $query->execute();
     $result=$query->fetchAll();
     
@@ -34,7 +57,7 @@ class StudentDAO {
     $arrayCounter = 0;
     
     foreach ($result as &$row) {
-      $tempStudent = new Student($row['id'], $row['name']);
+      $tempStudent = new Student($row['id'], $row['name'], $row['yearofstudy'], $row['confused']);
       $studentArray[$arrayCounter] = $tempStudent;
       $arrayCounter++;
     }

@@ -18,14 +18,37 @@ class TeaherDAO {
   }
 
   function get($id) {
-   //> EXECUTE HERE PDO
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("SELECT * FROM teacher WHERE id=".$id);
+    $query->execute();
+    $result=$query->fetchAll();
+
+    return new Teacher($result[0]);
+  }
+
+  function insert($teacher) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare('INSERT INTO teacher (\'id\',\'name\',\'speciality\') VALUES ('.$teacher->getId().', '.$teacher->getName().', '.$teacher->getSpeciality().');');
+    $query->execute(); 
+  }
+
+  function update($teacher) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare('UPDATE teacher SET name='.$teacher->getName().',speciality='.$teacher->getSpeciality().'WHERE id='.$teacher->getId().';');
+    $query->execute(); 
+  }
+
+  function delete($teacher) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare('DELETE FROM teacher WHERE id='.$teacher->getId().';');
+    $query->execute(); 
   }
 
   function listAll() {
     echo "<br>Listiiiiing<br>";
     
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare("SELECT * FROM teachers ");
+    $query=$dbConnection->prepare("SELECT * FROM teacher ");
     $query->execute();
     $result=$query->fetchAll();
     
@@ -34,7 +57,7 @@ class TeaherDAO {
     $arrayCounter = 0;
     
     foreach ($result as &$row) {
-      $tempTeacher = new Teacher($row['id'], $row['name']);
+      $tempTeacher = new Teacher($row['id'], $row['name'], $row['speciality']);
       $teacherArray[$arrayCounter] = $tempTeacher;
       $arrayCounter++;
     }
