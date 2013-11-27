@@ -18,7 +18,12 @@ class StudentDAO {
   }
 
   function get($id) {
-   //> EXECUTE HERE PDO
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("SELECT * FROM student WHERE id=".$id);
+    $query->execute();
+    $result=$query->fetchAll();
+
+    return new Student($result[0]);
   }
 
   function insert($student) {

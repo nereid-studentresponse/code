@@ -14,6 +14,14 @@ class Student {
       $this->yearofstudy=$yearofstudy;
       $this->confused=$confused;
   }
+
+  // Constructor from DB row
+  function __construct($row) {
+    $this->id=$row['id'];
+    $this->name=$row['name'];
+    $this->yearofstudy=$row['yearofstudy'];
+    $this->confused=$row['confused'];
+  }
   
   function getId() {
     return $this->id;

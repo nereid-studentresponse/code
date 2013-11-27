@@ -12,6 +12,13 @@ class Teacher {
       $this->name=$name;
       $this->speciality=$speciality;
   }
+
+  // Constructor from DB row
+  function __construct($row) {
+    $this->id=$row['id'];
+    $this->name=$row['name'];
+    $this->speciality=$row['speciality'];
+  }
   
   function getId() {
     return $this->id;
