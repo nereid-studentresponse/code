@@ -15,6 +15,14 @@ class School {
 	
   }
   
+  // Constructor from DB row
+	function __construct($row) {
+		$this->id=$row['id'];
+		$this->name=$row['name'];
+		$this->address=$row['address'];
+		$this->city=$row['city'];
+	}
+  
   function getId() {
     return $this->id;
   }

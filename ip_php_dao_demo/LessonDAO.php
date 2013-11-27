@@ -17,7 +17,11 @@ class LessonDAO {
   }
 
   function get($id) {
-   // i'll add the getter soon...
+	$dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("SELECT * FROM lesson WHERE id=".$id);
+    $query->execute();
+    $result=$query->fetchAll();
+	return new Lesson($result[0]);
   }
 
   function insert($lesson) {

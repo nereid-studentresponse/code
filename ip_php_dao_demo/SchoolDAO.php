@@ -17,8 +17,12 @@ class SchoolDAO {
       return $dbConnection;
   }
 
-  function get($id) {
-    // i'll add the getter soon...
+   function get($id) {
+	$dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("SELECT * FROM school WHERE id=".$id);
+    $query->execute();
+    $result=$query->fetchAll();
+	return new School($result[0]);
   }
 
   function insert($school) {

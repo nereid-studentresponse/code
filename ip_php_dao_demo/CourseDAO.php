@@ -18,7 +18,19 @@ class CourseDAO {
   }
 
   function get($id) {
-   //> EXECUTE HERE PDO
+   echo "<br>Getting course id= $id<br>";
+   
+   $dbConnection=$this->dbConnect();
+   $query=$dbConnection->prepare("SELECT * FROM courses WHERE id = :id ");
+   $query->bindParam(':id', $id);
+   $query->execute();
+   $result=$query->fetch(PDO::FETCH_ASSOC);
+   
+   $course = new Course($result['id'], $result['name'], $result['description']);
+   
+   
+   return $course;
+   
   }
 
   function listAll() {
