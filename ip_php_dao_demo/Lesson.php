@@ -18,6 +18,15 @@ class Lesson {
 	  $this->course= $course;
   }
   
+   // Constructor from DB row
+	function __construct($row) {
+		$this->id=$row['id'];
+		$this->title=$row['title'];
+		$this->subject=$row['subject'];
+		$this->nblesson=$row['nblesson'];
+		$this->course=$row['course'];
+	}
+  
   function getId() {
     return $this->id;
   }
