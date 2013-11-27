@@ -20,10 +20,12 @@
   $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
   $cdao = new CourseDAO($dbc);
   
+  //$courses = $cdao->listAll();
   $courses = $cdao->listAll();
+  $course = $cdao->get(1);
   
   echo "<br><br>";
-  echo print_r($courses);
+  echo print_r($course);
   echo "<br><br>";
   
 ?>
