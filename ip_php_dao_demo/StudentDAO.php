@@ -28,13 +28,13 @@ class StudentDAO {
 
   function insert($student) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare('INSERT INTO student (\'id\',\'name\',\'yearofstudy\',\'confused\') VALUES ('.$student->getId().', '.$student->getName().', '.$student->getYearOfStudy().','.$student->isConfused().');');
+    $query=$dbConnection->prepare('INSERT INTO student (\'name\',\'yearofstudy\',\'confused\') VALUES ('.$student->getName().', '.$student->getYearOfStudy().');');
     $query->execute(); 
   }
 
   function update($student) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare('UPDATE student SET name='.$student->getName().',yearofstudy='.$student->getYearOfStudy().', confused='.$student->isConfused().'WHERE id='.$student->getId().';');
+    $query=$dbConnection->prepare('UPDATE student SET name='.$student->getName().',yearofstudy='.$student->getYearOfStudy().'WHERE id='.$student->getId().';');
     $query->execute(); 
   }
 

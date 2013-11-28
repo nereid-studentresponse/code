@@ -28,7 +28,7 @@ class TeaherDAO {
 
   function insert($teacher) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare('INSERT INTO teacher (\'id\',\'name\',\'speciality\') VALUES ('.$teacher->getId().', '.$teacher->getName().', '.$teacher->getSpeciality().');');
+    $query=$dbConnection->prepare('INSERT INTO teacher (\'name\',\'speciality\') VALUES ('.$teacher->getName().', '.$teacher->getSpeciality().');');
     $query->execute(); 
   }
 
