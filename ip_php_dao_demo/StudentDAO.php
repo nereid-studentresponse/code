@@ -28,13 +28,13 @@ class StudentDAO {
 
   function insert($student) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare('INSERT INTO student (\'name\',\'yearofstudy\',\'confused\') VALUES ('.$student->getName().', '.$student->getYearOfStudy().');');
+    $query=$dbConnection->prepare('INSERT INTO student (\'name\',\'email\',\'password\',\'yearofstudy\') VALUES ('.$student->getName().', '.$teacher->getEmail().', '.$teacher->getPassword().');');
     $query->execute(); 
   }
 
   function update($student) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare('UPDATE student SET name='.$student->getName().',yearofstudy='.$student->getYearOfStudy().'WHERE id='.$student->getId().';');
+    $query=$dbConnection->prepare('UPDATE student SET name='.$student->getName().',email='.$teacher->getEmail().',password='.$teacher->getEmail().',yearofstudy='.$student->getYearOfStudy().'WHERE id='.$student->getId().';');
     $query->execute(); 
   }
 
@@ -57,7 +57,7 @@ class StudentDAO {
     $arrayCounter = 0;
     
     foreach ($result as &$row) {
-      $tempStudent = new Student($row['id'], $row['name'], $row['yearofstudy'], $row['confused']);
+      $tempStudent = new Student($row['id'], $row['name'], $row['email'], $row['password'], $row['yearofstudy']);
       $studentArray[$arrayCounter] = $tempStudent;
       $arrayCounter++;
     }
