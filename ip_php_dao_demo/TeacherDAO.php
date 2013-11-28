@@ -28,13 +28,13 @@ class TeaherDAO {
 
   function insert($teacher) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare('INSERT INTO teacher (\'name\',\'speciality\') VALUES ('.$teacher->getName().', '.$teacher->getSpeciality().');');
+    $query=$dbConnection->prepare('INSERT INTO teacher (\'name\',\'email\',\'password\',\'speciality\') VALUES ('.$teacher->getName().', '.$teacher->getEmail().', '.$teacher->getPassword().', '.$teacher->getSpeciality().');');
     $query->execute(); 
   }
 
   function update($teacher) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare('UPDATE teacher SET name='.$teacher->getName().',speciality='.$teacher->getSpeciality().'WHERE id='.$teacher->getId().';');
+    $query=$dbConnection->prepare('UPDATE teacher SET name='.$teacher->getName().',email='.$teacher->getEmail().',password='.$teacher->getEmail().',speciality='.$teacher->getSpeciality().'WHERE id='.$teacher->getId().';');
     $query->execute(); 
   }
 
@@ -57,7 +57,7 @@ class TeaherDAO {
     $arrayCounter = 0;
     
     foreach ($result as &$row) {
-      $tempTeacher = new Teacher($row['id'], $row['name'], $row['speciality']);
+      $tempTeacher = new Teacher($row['id'], $row['name'],$row['email'], $row['password'], $row['speciality']);
       $teacherArray[$arrayCounter] = $tempTeacher;
       $arrayCounter++;
     }
