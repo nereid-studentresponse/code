@@ -4,12 +4,12 @@
 class Course {
 
   private $id;
-  private $name;
+  private $title;
   private $description;
 
-  function __construct($id, $name, $description){
+  function __construct($id, $title, $description){
       $this->id=$id;
-      $this->name=$name;
+      $this->title=$title;
       $this->description=$description;
   }
   
@@ -17,8 +17,8 @@ class Course {
     return $this->id;
   }
   
-  function getName() {
-    return $this->name;
+  function getTitle() {
+    return $this->title;
   }
   
   function getDescription() {

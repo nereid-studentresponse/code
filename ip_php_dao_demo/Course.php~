@@ -12,24 +12,17 @@ class Course {
       $this->name=$name;
       $this->description=$description;
   }
-  function dbConnect(){
-      $dbConnection=$this->dbh->createConnexion();
-      return $dbConnection;
+  
+  function getId() {
+    return $this->id;
   }
-
-  function get($id) {
-   //> EXECUTE HERE PDO
+  
+  function getName() {
+    return $this->name;
   }
-
-  function listAll() {
-    echo "<br>Listiiiiing<br>";
-    
-    $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare("SELECT name FROM courses ");
-    $query->execute();
-    $result=$query->fetch(PDO::FETCH_ASSOC);
-    
-    echo print_r($result);
+  
+  function getDescription() {
+    return $this->id;
   }
 
 }

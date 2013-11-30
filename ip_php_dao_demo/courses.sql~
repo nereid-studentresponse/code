@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `description` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
@@ -37,6 +37,6 @@ CREATE TABLE IF NOT EXISTS `course` (
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `course` (`id`, `title`, `description`) VALUES
+INSERT INTO `course` (`id`, `name`, `description`) VALUES
 (1, 'History', 'History is really important guys!'),
 (2, 'Geography', 'Maps & stuff. Pretty useful, especially if you''re Christopher Collombus.');

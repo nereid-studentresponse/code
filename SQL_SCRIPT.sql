@@ -89,8 +89,7 @@ CREATE TABLE IF NOT EXISTS `contain_fquestion` (
 CREATE TABLE IF NOT EXISTS `course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
-  `subject` varchar(255) NOT NULL,
-  `nbLessons` int(11) NOT NULL,
+  `description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

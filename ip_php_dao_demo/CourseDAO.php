@@ -7,7 +7,6 @@ include_once "Course.php";
 class CourseDAO {
 
   private $dbh; // This is an instance of Class_DB to be injected in the functions.
-  private $table=NULL;
 
   function __construct($dbh){
       $this->dbh=$dbh;
@@ -21,12 +20,12 @@ class CourseDAO {
    echo "<br>Getting course id= $id<br>";
    
    $dbConnection=$this->dbConnect();
-   $query=$dbConnection->prepare("SELECT * FROM courses WHERE id = :id ");
+   $query=$dbConnection->prepare("SELECT * FROM course WHERE id = :id ");
    $query->bindParam(':id', $id);
    $query->execute();
    $result=$query->fetch(PDO::FETCH_ASSOC);
    
-   $course = new Course($result['id'], $result['name'], $result['description']);
+   $course = new Course($result['id'], $result['title'], $result['description']);
    
    
    return $course;
@@ -37,7 +36,7 @@ class CourseDAO {
     echo "<br>Listiiiiing<br>";
     
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare("SELECT * FROM courses ");
+    $query=$dbConnection->prepare("SELECT * FROM course ");
     $query->execute();
     $result=$query->fetchAll();
     
@@ -46,7 +45,7 @@ class CourseDAO {
     $arrayCounter = 0;
     
     foreach ($result as &$row) {
-      $tempCourse = new Course($row['id'], $row['name'], $row['description']);
+      $tempCourse = new Course($row['id'], $row['title'], $row['description']);
       $courseArray[$arrayCounter] = $tempCourse;
       $arrayCounter++;
     }
@@ -57,6 +56,22 @@ class CourseDAO {
     // echo "<br><br>";
     // echo print_r($courseArray);
     return $courseArray;
+  }
+  
+  function insert($course) {
+    echo "<br>Inserting course id=". $course->getId() . " <br>";
+
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("INSERT INTO `course` (`id`, `title`, `description`) VALUES ( :id, :title, :description) ");
+    $query->bindParam(':id', $course->getId());
+    $query->bindParam(':title', $course->getTitle());
+    $query->bindParam(':description', $course->getDescription());
+    $query->execute();
+    
+    // TODO return false if it failed
+    
+    return true;
+  
   }
 
 }
