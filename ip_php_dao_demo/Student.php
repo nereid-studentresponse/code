@@ -4,11 +4,12 @@
 class Student {
 
   private $id;
+  // why don't we have a first name and a last name?
   private $name;
   private $email;
   private $password;
   private $yearofstudy;
-  private $confused
+  private $confused;
 
   function __construct($id, $name, $email, $password, $yearofstudy){
       $this->id=$id;
@@ -19,6 +20,8 @@ class Student {
   }
 
   // Constructor from DB row
+  /*
+   * This is not possible, only one constructor per class in PHP
   function __construct($row) {
     $this->id=$row['id'];
     $this->name=$row['name'];
@@ -26,6 +29,7 @@ class Student {
     $this->password=$row['password'];
     $this->yearofstudy=$row['yearofstudy'];
   }
+  */
   
   function getId() {
     return $this->id;

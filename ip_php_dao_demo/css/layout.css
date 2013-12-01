@@ -1,0 +1,29 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+#header {
+	text-align: center;
+	background: none repeat scroll 0% 0% #ECECEC;
+	border-bottom: 4px solid #FF9966;
+}
+
+#header h2 {
+	margin: 0;
+	padding: 30px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#header img {
+	max-height: 80px;
+	display: inline-block;
+}
+
+#content {
+	max-width: 1000px;
+	margin: 50px auto auto auto;
+	text-align: center;
+}

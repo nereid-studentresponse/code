@@ -28,8 +28,17 @@ class StudentDAO {
 
   function insert($student) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare('INSERT INTO student (\'name\',\'email\',\'password\',\'yearofstudy\') VALUES ('.$student->getName().', '.$teacher->getEmail().', '.$teacher->getPassword().');');
-    $query->execute(); 
+    $sql = "INSERT INTO student (`name`,`email`,`password`,`yearofstudy`) VALUES (:name, :email, :password, :yearofstudy)";
+    $query=$dbConnection->prepare($sql);
+    $query->bindParam(":name", $student->getName());
+    $query->bindParam(":email", $student->getEmail());
+    $query->bindParam(":password", $student->getPassword());
+    $query->bindParam(":yearofstudy", $student->getYearOfStudy());
+    
+    $count = $query->execute();
+    
+    return $count > 0;
+    
   }
 
   function update($student) {

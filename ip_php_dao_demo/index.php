@@ -41,7 +41,7 @@
 foreach($courses as $course) {
   echo "<tr>";
   echo "  <td>" . $course->getId() . "</td>";
-  echo "  <td>" . $course->getName() . "</td>";
+  echo "  <td>" . $course->getTitle() . "</td>";
   echo "  <td>" . $course->getDescription() . "</td>";
   echo "</tr>";
 }
@@ -49,4 +49,8 @@ foreach($courses as $course) {
 
 </table>
 </div>
+
+<p> 
+  <h3>To go to the registration page: <a href="index_router.php?page=register">it's over here.</a> (Students only for now)</h3>
+</p>
 

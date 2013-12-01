@@ -66,11 +66,9 @@ class CourseDAO {
     $query->bindParam(':id', $course->getId());
     $query->bindParam(':title', $course->getTitle());
     $query->bindParam(':description', $course->getDescription());
-    $query->execute();
+    $count = $query->execute();
     
-    // TODO return false if it failed
-    
-    return true;
+    return $count > 0;
   
   }
 

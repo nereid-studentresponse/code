@@ -18,6 +18,8 @@ class Teacher {
   }
 
   // Constructor from DB row
+  /*
+   * This is not possible, only one constructor per class in PHP
   function __construct($row) {
     $this->id=$row['id'];
     $this->name=$row['name'];
@@ -25,6 +27,7 @@ class Teacher {
     $this->password=$row['password'];
     $this->speciality=$row['speciality'];
   }
+  */
   
   function getId() {
     return $this->id;
