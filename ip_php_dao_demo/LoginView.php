@@ -4,8 +4,7 @@ require_once "LayoutView.php";
 class LoginView extends LayoutView {
   
   public function __construct($data = null) {
-		parent::__construct();
-		$this->title = "Internation Project : welcome !";
+		parent::__construct("Internation Project : welcome !");
   }
   
   public function setData($data) {

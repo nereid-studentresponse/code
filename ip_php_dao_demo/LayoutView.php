@@ -1,20 +1,15 @@
 <?php
 class LayoutView {
 
-  protected $data;
   protected $title; //what is displayed on the header
   
-  public function __construct($data = null) {
-    $this->data = $data;
-	$this->title = "Internation Project : student response"; //default title
+  public function __construct($title = "Internation Project : student response") {
+    $this->title = $title; //default title
   }
   
-  public function setData($data) {
-    $this->data = $data;
-  }
   
   public function content() {
-	//nothing. Content in children
+  //nothing. Content in children
   }
   
   public function header() {
@@ -43,19 +38,19 @@ class LayoutView {
   }
   
   public function footer() {
-	return '
-		</div> <!-- end of content -->
-		<div id="footer">
-			<span>&copy NEREID 2013</span>
-		</div>
-		</body>
-	 </html>
-	';
-	}
+    return '
+      </div> <!-- end of content -->
+      <div id="footer">
+        <span>&copy NEREID 2013</span>
+      </div>
+      </body>
+    </html>
+    ';
+  }
   
   public function output() {
-		return $this->header() . $this->content() .	$this->footer();
-	}
+    return $this->header() . $this->content() .	$this->footer();
+  }
 
 
 }
