@@ -28,6 +28,7 @@ class LayoutView {
 		<!-- CSS -->
 		<link rel="stylesheet" href="./css/layout.css">
 		<link rel="stylesheet" href="./css/index.css">
+		<link rel="stylesheet" href="./css/courses.css">
 		
     </head>
     <body>
@@ -44,7 +45,9 @@ class LayoutView {
   public function footer() {
 	return '
 		</div> <!-- end of content -->
-		<div id="footer"></div>
+		<div id="footer">
+			<span>&copy NEREID 2013</span>
+		</div>
 		</body>
 	 </html>
 	';

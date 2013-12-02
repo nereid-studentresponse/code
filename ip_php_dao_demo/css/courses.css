@@ -1,0 +1,37 @@
+#coursesBlock {
+	display: table;
+	width: 100%;
+}
+
+#coursesBlock #menu {
+	display: table-cell;
+	width: 200px;
+	border: 1px solid blue; /* TODO : remove - just for test */
+}
+
+#coursesBlock #courseDetails {
+	display: table-cell;
+	width: auto;
+	border: 1px solid red; /* TODO : remove - just for test */
+}
+
+#coursesBlock .bold {
+	font-weight: bold;
+	margin: 2px auto;
+}
+
+#coursesBlock ul {
+	padding: 0px;
+	list-style: none;
+}
+
+#coursesBlock li {
+	text-align: left;
+	padding: 5px 0px 5px 2px;
+	cursor: pointer;
+}
+
+#coursesBlock li:hover {
+	background: rgb(255, 153, 102);
+	color: white;
+}

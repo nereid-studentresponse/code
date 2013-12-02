@@ -14,7 +14,7 @@ class CourseController {
   }
   
   public function courseIndex() {
-    // nothing to do here, just displaying the page
+    // TODO : put the list of courses of the user in $data, as well as the details of the first course in the list
   }
 }
 ?>
