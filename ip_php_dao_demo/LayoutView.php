@@ -1,10 +1,12 @@
 <?php
 class LayoutView {
 
-  private $data;
+  protected $data;
+  protected $title; //what is displayed on the header
   
   public function __construct($data = null) {
     $this->data = $data;
+	$this->title = "Internation Project : student response"; //default title
   }
   
   public function setData($data) {
@@ -27,14 +29,12 @@ class LayoutView {
 		<link rel="stylesheet" href="./css/layout.css">
 		<link rel="stylesheet" href="./css/index.css">
 		
-		<!-- Javascript -->
-		
     </head>
     <body>
 		<div id="bloc_page">
 			<div id="header">
 				<img src="./css/images/small_globe.png" alt="International" />
-				<h2>International project prototype : student response</h2>
+				<h2>'. $this->title .'</h2>
 			</div> 
 			
 			<div id="content">
@@ -44,7 +44,7 @@ class LayoutView {
   public function footer() {
 	return '
 		</div> <!-- end of content -->
-		<div id="footer">Footer</div>
+		<div id="footer"></div>
 		</body>
 	 </html>
 	';
