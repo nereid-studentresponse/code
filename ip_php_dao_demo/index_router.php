@@ -2,9 +2,10 @@
 // views
 require_once "RegisterView.php";
 require_once "RegisteredView.php";
+require_once "LoginView.php";
 
 // controllers
-require_once"PersonController.php";
+require_once "PersonController.php";
 
 $page = $_GET['page'];
 if (!empty($page)) {
@@ -13,14 +14,20 @@ if (!empty($page)) {
     $get = array(
         'register' => array('view' => 'RegisterView', 
                             'controller' => 'PersonController', 
-                            'action' => 'registerIndex')
+                            'action' => 'registerIndex'),
+		'login' => array('view' => 'LoginView', 
+                            'controller' => 'PersonController', 
+                            'action' => 'loginIndex')
     );
     
     // array for the post actions (i.e. usually submit information)
     $post = array(
         'register' => array('view' => 'RegisteredView', 
                             'controller' => 'PersonController', 
-                            'action' => 'createPerson')
+                            'action' => 'createPerson'),
+		'login' => array('view' => 'LoginView', 
+                            'controller' => 'PersonController', 
+                            'action' => 'login')
     );
     
     // will have the array corresponding to the desired action

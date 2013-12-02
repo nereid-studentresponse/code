@@ -55,5 +55,8 @@ class PersonController {
     // nothing to do here, just displaying the page in the router
   }
 
+  public function loginIndex() {
+    // nothing to do here, just displaying the page in the router
+  }
 }
 ?>
