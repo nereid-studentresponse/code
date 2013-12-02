@@ -58,5 +58,17 @@ class PersonController {
   public function loginIndex() {
     // nothing to do here, just displaying the page in the router
   }
+  
+  /**
+  * function called after post on loginView.php 
+  */
+  public function login() {
+		// call for authentication
+		// if not ok : return on page loginView.php
+		
+		//if ok : go on page courses
+		header('Location: index_router.php?page=myCourses');  
+		exit();
+  }
 }
 ?>

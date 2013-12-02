@@ -19,11 +19,11 @@ class LoginView extends LayoutView {
 		</div>
 		
 		<div id="authentication">
-			<form action="index.php" method="post">
+			<form action="index_router.php?page=login" method="post">
 				<fieldset>
 					<legend> Please login here : </legend>
-					<label for="login" class="inline">Login :</label>
-					<input type="text" name="login" />
+					<label for="email" class="inline">Email :</label>
+					<input type="text" name="email" />
 					<label for="password" class="inline">Password :</label>
 					<input type="password" name="password" />
 					<input type="submit" value="Enter" />

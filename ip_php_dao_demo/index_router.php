@@ -3,9 +3,11 @@
 require_once "RegisterView.php";
 require_once "RegisteredView.php";
 require_once "LoginView.php";
+require_once "CourseView.php";
 
 // controllers
 require_once "PersonController.php";
+require_once "CourseController.php";
 
 $page = $_GET['page'];
 if (!empty($page)) {
@@ -17,7 +19,10 @@ if (!empty($page)) {
                             'action' => 'registerIndex'),
 		'login' => array('view' => 'LoginView', 
                             'controller' => 'PersonController', 
-                            'action' => 'loginIndex')
+                            'action' => 'loginIndex'),
+		'myCourses' => array('view' => 'CourseView', 
+                            'controller' => 'CourseController', 
+                            'action' => 'courseIndex')		
     );
     
     // array for the post actions (i.e. usually submit information)
