@@ -75,6 +75,8 @@ class PersonController {
     $person = $dao->getByEmail($email);
     
     if ($this->checkPass($password, $person->getPassword())) {
+      session_start();
+      $_SESSION['user'] = $person;
       //if ok : go on page courses
       header('Location: index_router.php?page=myCourses');
     } else {
@@ -83,6 +85,13 @@ class PersonController {
     
     exit();
   }
+
+  public function logout() {
+    session_destroy();
+    $data = array( "ok" => true);
+    $this->view->setData($data);
+  }
+
 
   /**
    * just sha1 for now, but we can upgrade it to a more secure function

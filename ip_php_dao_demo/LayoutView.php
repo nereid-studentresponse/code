@@ -1,10 +1,20 @@
 <?php
+/**
+ * Abstract view (not supposed to be used as is) to extend from so that every page has a header and footer.
+ */
 class LayoutView {
 
   protected $title; //what is displayed on the header
+  protected $authenticated; // true if the user is authenticated, so that we display the menu
   
-  public function __construct($title = "Internation Project : student response") {
+  public function __construct($title = "Internation Project : student response", $authenticated = null) {
     $this->title = $title; //default title
+    if($authenticated != null) {
+      $this->authenticated = $authenticated;
+    } else {
+      $this->authenticated = isset($_SESSION["user"]);
+    }
+    
   }
   
   
@@ -31,6 +41,7 @@ class LayoutView {
 			<div id="header">
 				<img src="./css/images/small_globe.png" alt="International" />
 				<h2>'. $this->title .'</h2>
+				'. $this->menu() .'
 			</div> 
 			
 			<div id="content">
@@ -50,6 +61,18 @@ class LayoutView {
   
   public function output() {
     return $this->header() . $this->content() .	$this->footer();
+  }
+
+  private function menu() {
+    if($this->authenticated) {
+      return '
+      <div id="menu">
+        <p id="logoutLink"><a href="index_router.php?page=logout">Log Out</a></p>
+      </div>
+      ';
+    } else {
+      return '';
+    }
   }
 
 
