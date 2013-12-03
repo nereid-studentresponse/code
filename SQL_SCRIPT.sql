@@ -258,7 +258,8 @@ CREATE TABLE IF NOT EXISTS `student` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `yearofstudy` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -288,7 +289,8 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `speciality` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------

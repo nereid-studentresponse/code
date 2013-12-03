@@ -3,6 +3,7 @@
 
 include_once "DB.php";
 include_once "Course.php";
+include_once "Student.php";
 
 class CourseDAO {
 
@@ -69,7 +70,49 @@ class CourseDAO {
     $count = $query->execute();
     
     return $count > 0;
-  
+  }
+
+  function update($course) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("UPDATE `course` SET  `title`=:tile, `description`=:description WHERE `id` = :id ");
+    $query->bindParam(':id', $course->getId());
+    $query->bindParam(':title', $course->getTitle());
+    $query->bindParam(':description', $course->getDescription());
+    $count = $query->execute();
+    
+    return $count > 0;
+  }
+
+  function delete($course) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("DELETE FROM `course` WHERE `id` = :id ");
+    $query->bindParam(':id', $course->getId());
+    $count = $query->execute();
+    
+    return $count > 0;
+  }
+
+  /**
+   * Get all the courses a student is enrolled in
+   */
+  function getByStudent($student) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("SELECT c.id, c.title, c.description FROM course c JOIN enroll e ON c.id = e.id_course WHERE e.id_student = :sid ");
+    $query->bindParam(':sid', $student->getId());
+    $query->execute();
+    $result=$query->fetchAll();
+    
+    
+    $courseArray;
+    $arrayCounter = 0;
+    
+    foreach ($result as &$row) {
+      $tempCourse = new Course($row['id'], $row['title'], $row['description']);
+      $courseArray[$arrayCounter] = $tempCourse;
+      $arrayCounter++;
+    }
+
+    return $courseArray;
   }
 
 }

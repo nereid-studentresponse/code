@@ -34,7 +34,7 @@ class PersonController {
       $dao = new StudentDAO($dbc);
       // TODO have a better security for the password
       $person = new Student(null, $_POST["firstName"] . ' ' . $_POST["lastName"], 
-                              $_POST["mail"], sha1($_POST["password"]), $_POST["year"]);
+                              $_POST["mail"], $this->hashPass($_POST["password"]), $_POST["year"]);
     } else if($personType == "teacher") {
       $dao = new TeacherDAO($dbc);
       // TODO same for teacher
@@ -63,12 +63,39 @@ class PersonController {
   * function called after post on loginView.php 
   */
   public function login() {
-		// call for authentication
-		// if not ok : return on page loginView.php
-		
-		//if ok : go on page courses
-		header('Location: index_router.php?page=myCourses');  
-		exit();
+    // call for authentication
+    // if not ok : return on page loginView.php
+    
+    //TODO lowercase?
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    
+    $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
+    $dao = new StudentDAO($dbc);
+    $person = $dao->getByEmail($email);
+    
+    if ($this->checkPass($password, $person->getPassword())) {
+      //if ok : go on page courses
+      header('Location: index_router.php?page=myCourses');
+    } else {
+      header('Location: index_router.php?page=login');
+    }
+    
+    exit();
+  }
+
+  /**
+   * just sha1 for now, but we can upgrade it to a more secure function
+   */
+  private function hashPass($password) {
+    return sha1($password);
+  }
+
+  /**
+   * Returns true if the password matches the hashed one
+   */
+  private function checkPass($plainTextPwd, $hashedPwd) {
+    return $this->hashPass($plainTextPwd) == $hashedPwd;
   }
 }
 ?>

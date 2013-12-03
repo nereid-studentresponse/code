@@ -23,7 +23,17 @@ class StudentDAO {
     $query->execute();
     $result=$query->fetchAll();
 
-    return new Student($result[0]);
+    return Student::withRow($result[0]);
+  }
+
+  function getByEmail($email) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("SELECT * FROM student WHERE email=:email");
+    $query->bindParam(":email", $email);
+    $query->execute();
+    $result=$query->fetchAll();
+
+    return Student::withRow($result[0]);
   }
 
   function insert($student) {

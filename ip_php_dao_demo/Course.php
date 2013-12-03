@@ -22,7 +22,7 @@ class Course {
   }
   
   function getDescription() {
-    return $this->id;
+    return $this->description;
   }
 
 }
