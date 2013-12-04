@@ -7,25 +7,23 @@ class Lesson {
   private $id;
   private $title;
   private $subject;
-  private $nblesson;
-  private $course //This should be the entire object? or just the id (like a "pointer")?
+  private $document_url;
+  private $id_course 
 
-  function __construct($id, $title, $subject, $nblesson, $course){
+  function __construct($id, $title, $subject, $document_url, $id_course){
       $this->id=$id;
       $this->title=$title;
       $this->subject=$subject;
-	  $this->nblesson=$nblesson;
-	  $this->course= $course;
+	  $this->document_url=$document_url;
+	  $this->id_course= $id_course;
   }
   
-   // Constructor from DB row
-	function __construct($row) {
-		$this->id=$row['id'];
-		$this->title=$row['title'];
-		$this->subject=$row['subject'];
-		$this->nblesson=$row['nblesson'];
-		$this->course=$row['course'];
-	}
+  public static function withRow( array $row ) {
+    $instance = new self($row['id'], $row['title'], $row['subject'], 
+                         $row['document_url'], $row['id_course']);
+    return $instance;
+  }
+  
   
   function getId() {
     return $this->id;
@@ -39,12 +37,12 @@ class Lesson {
     return $this->subject;
   }
   
-  function getLessonNumber() {
-    return $this->nblesson;
+  function getDocumentUrl() {
+    return $this->document_url;
   }
   
-  function getCourse() {
-    return $this->course;
+  function getCourseId() {
+    return $this->id_course;
   }
 
 }

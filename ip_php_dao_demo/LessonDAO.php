@@ -21,18 +21,20 @@ class LessonDAO {
     $query=$dbConnection->prepare("SELECT * FROM lesson WHERE id=".$id);
     $query->execute();
     $result=$query->fetchAll();
-	return new Lesson($result[0]);
+	return Lesson::withRow($result[0]);
   }
 
   function insert($lesson) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare('INSERT INTO lesson (\'title\',\'subject\',\'nblesson\',\'id_course\') VALUES ('.$lesson->getTitle().', '.$lesson->getSubject().', '.$lesson->getLessonNumber().', '.$lesson->getCourse()->getId().');');
-    $query->execute(); 
+    $query=$dbConnection->prepare('INSERT INTO lesson (\'title\',\'subject\',\'document_url\',\'id_course\') VALUES ('.$lesson->getTitle().', '.$lesson->getSubject().', '.$lesson->getDocumentUrl().', '.$lesson->getCourseId().');');
+    $count = $query->execute();
+    
+    return $count > 0;
   }
 
   function update($lesson) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare('UPDATE lesson SET title='.$lesson->getTitle().',subject='.$lesson->getSubject().', nblesson='.$lesson->getLessonNumber().' WHERE id='.$lesson->getId().';');
+    $query=$dbConnection->prepare('UPDATE lesson SET title='.$lesson->getTitle().',subject='.$lesson->getSubject().', document_url='.$lesson->getDocumentUrl().' WHERE id='.$lesson->getId().';');
     $query->execute(); 
   }
 
@@ -54,17 +56,8 @@ class LessonDAO {
     $arrayCounter = 0;
     
     foreach ($result as &$row) {
-		/*
-		//Giving the entire object Course to lesson -> Maybe not neccesary, maybe lesson should only conain the id of course
 		
-		$sub_query=$dbConnection->prepare("SELECT * FROM course WHERE id='".$row['id_course']."' ");
-		$sub_query->execute();
-		$sub_result=$sub_query->fetchAll();
-		$tempCourse = new Course($sub_result['id'], $sub_result['name'], $sub_result['description']);
-		*/
-		$tempCourse = $row['id_course'];
-	
-		$tempLesson = new Lesson($row['id'], $row['title'], $row['subject'], $row['nblesson'], $tempCourse);
+		$tempLesson = new Lesson($row['id'], $row['title'], $row['subject'], $row['document_url'], $row['id_course']);
 		$lessonArray[$arrayCounter] = $tempLesson;
 		$arrayCounter++;
     }
