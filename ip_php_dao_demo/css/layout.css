@@ -4,6 +4,11 @@ html, body {
 	margin: 0;
 }
 
+#bloc_page {
+	min-height:100%;
+	position:relative;
+}
+
 #header {
 	text-align: center;
 	background: none repeat scroll 0% 0% #ECECEC;
@@ -26,10 +31,12 @@ html, body {
 	max-width: 1000px;
 	margin: 50px auto auto auto;
 	text-align: center;
+	padding-bottom: 30px;
 }
 
  #footer {
 	position: absolute;
+	height: 20px;
 	background: rgb(255, 153, 102);
 	color: white;
 	text-align: center;

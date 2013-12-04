@@ -1,6 +1,8 @@
 $(document).ready(function() {
 	testStatusRadio();
-	
+		$("#back").click(function() {
+			$(location).attr('href',"index_router.php?page=login");
+		});
 	
 		$("#registrationForm").validate({
 		rules: {

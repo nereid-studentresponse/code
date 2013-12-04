@@ -90,6 +90,7 @@ class RegisterView extends LayoutView{
 								</select>
 							</div>
 						</fieldset>
+						<input id="back" type="button" value="Back on login"/>
 						<input type="submit" value="Confirm"/>
 					</form>
 				</div>

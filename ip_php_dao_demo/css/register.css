@@ -1,30 +1,30 @@
-#content {
+#authentication #content {
 	margin-top: 10px!important;
 }
 
-form {
+#authentication form {
 	margin: auto;
-	max-width: 450px;
+	max-width: 600px!important;
 }
 
-label {
+#authentication label {
 	margin-top: 20px;
 	display: inline-block;
 	width: 150px;
 	text-align: left;
 }
 
-fieldset {
+#authentication fieldset {
 	border: none;
 }
 
-legend {
+#authentication legend {
 	border-bottom: 2px dashed #FF6633;
 	text-align: center;
 	width: 100%;
 }
 
-input {
+#authentication input {
 	background-color:#FFF3F3;
 	padding: 3px;
 	border: 1px solid #F5C5C5;
@@ -34,37 +34,38 @@ input {
 	box-shadow: 1px 1px 2px #FF9966 inset;
 }
 
-select {
+#authentication select {
 	width: 250px;
 }
 
-.radio {
+#authentication .radio {
 	width: 250px;
 	display: inline-block;
 	text-align: left;
 }
 
-.formBlock {
+#authentication .formBlock {
 	display: block;
 }
 
-#statusLabel label {
+#authentication #statusLabel label {
 	vertical-align: top;
 }
 
-input[type=radio] {
+#authentication input[type=radio] {
 	width: auto;
 	margin-right : 5px;
 }
  
-input[type=submit] {
+#authentication input[type=submit], #authentication input[type=button] {
 	width: 100px;
-	display: block;
+	display: inline-block;
 	box-shadow: 1px 1px 1px #FF9966;
 	cursor: pointer;
+	margin-bottom: 10px!important;
 }
 
-input[type=submit]:hover {
+#authentication input[type=submit]:hover, #authentication input[type=button]:hover {
 	background-color: #EF8956!important;
 	color: white;
 }

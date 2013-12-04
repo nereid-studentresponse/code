@@ -13,6 +13,7 @@ class LoginView extends LayoutView {
 
   public function content() {
 	return '
+	<div id="loginView">
 		<div id="error">
 			<?php echo $error; ?>
 		</div>
@@ -40,7 +41,8 @@ class LoginView extends LayoutView {
 				lessons and questions related to their program, and students can follow lessons, take notes and answer questions.</p>
 				<p>Enjoy this new educational tool !</p>
 			</fieldset>
-		</div>'
+		</div>
+	</div>'
 	;
 }
 

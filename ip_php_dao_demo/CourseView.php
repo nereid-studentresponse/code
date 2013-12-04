@@ -17,6 +17,12 @@ class CourseView extends LayoutView {
 			<div id="menu">
 				<p class="title bold">My courses</p>
 				<ul class="list">
+					<a href="index_router.php?page=enroll">
+						<li class="add">
+							<img src="./css/images/add-icon.png" height="15" width="16" />
+							Enroll a new course
+						</li>
+					</a>
 					<li>Course 1</li>
 					<li>Course 2</li>
 					<li>Course 3</li>
