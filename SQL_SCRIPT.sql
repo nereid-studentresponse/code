@@ -161,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `freequestion` (
 CREATE TABLE IF NOT EXISTS `lesson` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
+  `document_url` varchar(255),
   `subject` varchar(255) NOT NULL,
   `nblesson` int(11) NOT NULL,
   `id_course` int(11) NOT NULL,
@@ -178,10 +179,10 @@ CREATE TABLE IF NOT EXISTS `lesson` (
 CREATE TABLE IF NOT EXISTS `note` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` text NOT NULL,
-  `id_slide` int(11) NOT NULL,
+  `id_lesson` int(11) NOT NULL,
   `id_student` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_slide` (`id_slide`),
+  KEY `id_lesson` (`id_lesson`),
   KEY `id_student` (`id_student`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -228,23 +229,6 @@ CREATE TABLE IF NOT EXISTS `selected_options` (
   KEY `id_chanswer` (`id_chanswer`),
   KEY `id_option` (`id_option`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `slide`
---
-
-CREATE TABLE IF NOT EXISTS `slide` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `subject` varchar(255) NOT NULL,
-  `nblesson` int(11) NOT NULL,
-  `id_lesson` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`,`id_lesson`),
-  KEY `id_lesson` (`id_lesson`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -363,7 +347,7 @@ ALTER TABLE `lesson`
 --
 ALTER TABLE `note`
   ADD CONSTRAINT `note_ibfk_2` FOREIGN KEY (`id_student`) REFERENCES `student` (`id`),
-  ADD CONSTRAINT `note_ibfk_1` FOREIGN KEY (`id_slide`) REFERENCES `slide` (`id`);
+  ADD CONSTRAINT `note_ibfk_1` FOREIGN KEY (`id_lesson`) REFERENCES `lesson` (`id`);
 
 --
 -- Filtros para la tabla `option`
@@ -377,12 +361,6 @@ ALTER TABLE `option`
 ALTER TABLE `selected_options`
   ADD CONSTRAINT `selected_options_ibfk_1` FOREIGN KEY (`id_chanswer`) REFERENCES `choiceanswer` (`id`),
   ADD CONSTRAINT `selected_options_ibfk_2` FOREIGN KEY (`id_option`) REFERENCES `option` (`id`);
-
---
--- Filtros para la tabla `slide`
---
-ALTER TABLE `slide`
-  ADD CONSTRAINT `slide_ibfk_1` FOREIGN KEY (`id_lesson`) REFERENCES `lesson` (`id`);
 
 --
 -- Filtros para la tabla `studentof`
