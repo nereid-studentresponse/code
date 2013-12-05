@@ -9,6 +9,8 @@ class CourseView extends LayoutView {
   
   public function setData($data) {
 	$this->data = $data;
+	// debug
+	//error_log(print_r($data, true));
   }
 
   public function content() {

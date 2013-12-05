@@ -28,11 +28,12 @@ class StudentDAO {
 
   function getByEmail($email) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare("SELECT * FROM student WHERE email=:email");
+    $query=$dbConnection->prepare("SELECT * FROM student WHERE email=:email;");
     $query->bindParam(":email", $email);
     $query->execute();
     $result=$query->fetchAll();
 
+    error_log(print_r($result, true));
     return Student::withRow($result[0]);
   }
 
@@ -87,6 +88,19 @@ class StudentDAO {
     // echo "<br><br>";
     // echo print_r($studentArray);
     return $studentArray;
+  }
+  
+  function enrollCourse($student, $course) {
+
+    $dbConnection=$this->dbConnect();
+    $sql = "INSERT INTO enroll (`id_student`,`id_course`) VALUES (:idstudent, :idcourse)";
+    $query=$dbConnection->prepare($sql);
+    $query->bindParam(":idstudent", $student->getId());
+    $query->bindParam(":idcourse", $course->getId());
+    
+    $count = $query->execute();
+    
+    return $count > 0;
   }
 
 }

@@ -8,7 +8,10 @@ class CourseEnrollView extends LayoutView {
   }
   
   public function setData($data) {
+  // array containing an array containing the courses at the index "courses"
 	$this->data = $data;
+	// debug
+	//error_log(print_r($data, true));
   }
 
   public function content() {
@@ -18,21 +21,21 @@ class CourseEnrollView extends LayoutView {
 				<div id="coursesAvailable">
 					<ul class="list">
 						<li>
-							<input type="checkbox" name="1" value="enroll">
+							<input type="checkbox" name="enroll[]" value="1">
 							<p class="title">Course 1</p>
 							<p class="teacher">Teacher : M. Blabla</p>
 							<p class="other"></p>
 							
 						</li>
 						<li>
-							<input type="checkbox" name="2" value="enroll">
+							<input type="checkbox" name="enroll[]" value="2">
 							<p class="title">Course 2</p>
 							<p class="teacher">Teacher : M. Bleble</p>
 							<p class="other"></p>
 						</li>
 						<li>
 							<p class="other"></p>
-							<input type="checkbox" name="3" value="enroll">
+							<input type="checkbox" name="enroll[]" value="3">
 							<p class="title">Course 3</p>
 							<p class="teacher">Teacher : M. Blibli</p>
 						</li>

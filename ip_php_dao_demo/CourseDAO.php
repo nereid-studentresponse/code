@@ -115,6 +115,29 @@ class CourseDAO {
     return $courseArray;
   }
 
+  /**
+   * Returns the courses avaible for a given student. For now just returns courses he's not enrolled in.
+   */
+  function getAvailableByStudent($student) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("SELECT c.id, c.title, c.description FROM course c WHERE c.id NOT IN (SELECT e.id_course FROM enroll e WHERE e.id_student = :sid and e.id_course = c.id) ");
+    $query->bindParam(':sid', $student->getId());
+    $query->execute();
+    $result=$query->fetchAll();
+    
+    
+    $courseArray;
+    $arrayCounter = 0;
+    
+    foreach ($result as &$row) {
+      $tempCourse = new Course($row['id'], $row['title'], $row['description']);
+      $courseArray[$arrayCounter] = $tempCourse;
+      $arrayCounter++;
+    }
+
+    return $courseArray;
+  }
+
 }
 
 ?>

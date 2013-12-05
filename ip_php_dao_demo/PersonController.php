@@ -72,6 +72,7 @@ class PersonController {
     
     $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
     $dao = new StudentDAO($dbc);
+    // TODO check if the email actually exists
     $person = $dao->getByEmail($email);
     
     if ($this->checkPass($password, $person->getPassword())) {
