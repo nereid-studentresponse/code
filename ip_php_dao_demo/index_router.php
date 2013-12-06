@@ -6,11 +6,13 @@ require_once "LoginView.php";
 require_once "CourseView.php";
 require_once "CourseEnrollView.php";
 require_once "LoggedOutView.php";
+require_once "LessonView.php";
 
 
 // controllers
 require_once "PersonController.php";
 require_once "CourseController.php";
+require_once "LessonController.php";
 
 $page = $_GET['page'];
 if (!empty($page)) {
@@ -57,6 +59,10 @@ if (!empty($page)) {
 			  'enroll' => array('view' => 'CourseView', 
                             'controller' => 'CourseController', 
                             'action' => 'courseEnrollPost',
+                            'auth' => true),
+			   'lessons' => array('view' => 'LessonView', 
+                            'controller' => 'LessonController', 
+                            'action' => 'lessonIndex',
                             'auth' => true),
     );
     

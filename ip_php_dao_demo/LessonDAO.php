@@ -2,6 +2,7 @@
 
 include_once "DB.php";
 include_once "Lesson.php";
+include_once "Course.php";
 
 class LessonDAO {
 
@@ -42,6 +43,25 @@ class LessonDAO {
     $dbConnection=$this->dbConnect();
     $query=$dbConnection->prepare('DELETE FROM lesson WHERE id='.$lesson->getId().';');
     $query->execute(); 
+  }
+  
+ function getByCourse($course) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("SELECT * FROM lesson WHERE id_course= :cid ");
+    $query->bindParam(':cid', $course->getId());
+    $query->execute();
+    $result=$query->fetchAll();
+     
+    $lessonArray;
+    $arrayCounter = 0;
+    
+    foreach ($result as &$row) {
+      $tempLesson = new Lesson($row['id'], $row['title'], $row['subject'], $row['document_url'], $row['id_course']);
+      $lessonArray[$arrayCounter] = $tempLesson;
+      $arrayCounter++;
+    }
+
+    return $lessonArray;
   }
 
   function listAll() {

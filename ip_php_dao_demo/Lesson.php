@@ -8,7 +8,7 @@ class Lesson {
   private $title;
   private $subject;
   private $document_url;
-  private $id_course 
+  private $id_course; 
 
   function __construct($id, $title, $subject, $document_url, $id_course){
       $this->id=$id;
