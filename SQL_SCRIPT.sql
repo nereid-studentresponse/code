@@ -129,13 +129,13 @@ CREATE TABLE IF NOT EXISTS `enroll` (
 
 CREATE TABLE IF NOT EXISTS `freeanswer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `number` int(11) NOT NULL,
   `text` text NOT NULL,
   `id_student` int(11) NOT NULL,
+  `id_question` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`,`id_student`),
-  KEY `id_student` (`id_student`)
+  UNIQUE KEY `id` (`id`,`id_student`,`id_question`),
+  KEY `id_student` (`id_student`),
+  KEY `id_question` (`id_question`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -147,9 +147,11 @@ CREATE TABLE IF NOT EXISTS `freeanswer` (
 CREATE TABLE IF NOT EXISTS `freequestion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
-  `numberofanswer` int(11) NOT NULL,
-  `correction` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `correction` varchar(255),
+  `id_lesson` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`,`id_lesson`),
+  KEY `id_lesson` (`id_lesson`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -163,7 +165,6 @@ CREATE TABLE IF NOT EXISTS `lesson` (
   `title` varchar(255) NOT NULL,
   `document_url` varchar(255),
   `subject` varchar(255) NOT NULL,
-  `nblesson` int(11) NOT NULL,
   `id_course` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`,`id_course`),
@@ -334,9 +335,16 @@ ALTER TABLE `enroll`
 -- Filtros para la tabla `freeanswer`
 --
 ALTER TABLE `freeanswer`
-  ADD CONSTRAINT `freeanswer_ibfk_1` FOREIGN KEY (`id_student`) REFERENCES `student` (`id`);
+  ADD CONSTRAINT `freeanswer_ibfk_1` FOREIGN KEY (`id_student`) REFERENCES `student` (`id`),
+  ADD CONSTRAINT `freeanswer_ibfk_2` FOREIGN KEY (`id_question`) REFERENCES `freequestion` (`id`);
 
+ --
+-- Filtros para la tabla `freequestion`
 --
+ALTER TABLE `freequestion`
+  ADD CONSTRAINT `freequestion_ibfk_1` FOREIGN KEY (`id_lesson`) REFERENCES `lesson` (`id`);
+
+  --
 -- Filtros para la tabla `lesson`
 --
 ALTER TABLE `lesson`
