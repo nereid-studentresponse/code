@@ -26,7 +26,7 @@ class LessonController {
    
     
     // TODO have the passwords and stuff in a config file
-    $dbc = new DB('localhost', 'srs', 'root', 'sunix');
+    $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
     
 	$dao = new LessonDAO($dbc);
 	$lesson = new Lesson(null, $_POST["title"],$_POST["subject"],$_POST["document_url"],$_POST["course_id"]);
@@ -39,13 +39,11 @@ class LessonController {
   
 
   public function lessonIndex() {
-  
-  
-    $course = new Course($_POST['id'], $_POST['title'], $_POST['description']); 
-    $dbc = new DB('localhost', 'srs', 'root', 'sunix');
+	$courseId = $_GET["id"];
+    $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
     $dao = new LessonDAO($dbc);
     
-    $lessons = $dao->getByCourse($course);
+    $lessons = $dao->getByCourse($courseId);
     
     $data = array( "course" => $course, "lessons" => $lessons);
     $this->view->setData($data);

@@ -45,14 +45,14 @@ class LessonDAO {
     $query->execute(); 
   }
   
- function getByCourse($course) {
+ function getByCourse($courseId) {
     $dbConnection=$this->dbConnect();
     $query=$dbConnection->prepare("SELECT * FROM lesson WHERE id_course= :cid ");
-    $query->bindParam(':cid', $course->getId());
+    $query->bindParam(':cid', $courseId);
     $query->execute();
     $result=$query->fetchAll();
      
-    $lessonArray;
+    $lessonArray = array();
     $arrayCounter = 0;
     
     foreach ($result as &$row) {

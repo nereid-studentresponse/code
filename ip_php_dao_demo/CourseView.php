@@ -17,31 +17,10 @@ class CourseView extends LayoutView {
   
   public function content() {
   
-	$string = "";
 	$counter = 1;
-	foreach($this->data['courses'] as &$course){
-		
-		$string = $string ."<table border = 1><tr><td>".$counter .".-  <b>". $course->getTitle() . "</b></td></tr><tr><td>" . $course->getDescription() . "" .
-		          '<form action="index_router.php?page=lessons" method="post" id="registrationForm">
-					<input type="hidden" name="id" value ="'.$course->getId().'" />
-					<input type="hidden" name="title" value ="'.$course->getTitle().'" />
-					<input type="hidden" name="description" value ="'.$course->getDescription().'" />
-					<input type="submit" value="Lessons"/>
-				   </form> </td></tr></table><br/>
-				  
-				  ' ;
-		$counter++;
 	
-	}
-  
-  
-	return $string;
-	
-  }
-
-  public function previous_content() {
-	return '
-		<div id="coursesBlock">
+	//enroll course + general structure
+	$string = '<div id="coursesBlock">
 			<div id="menu">
 				<p class="title bold">My courses</p>
 				<ul class="list">
@@ -50,19 +29,29 @@ class CourseView extends LayoutView {
 							<img src="./css/images/add-icon.png" height="15" width="16" />
 							Enroll a new course
 						</li>
-					</a>
-					<li>Course 1</li>
-					<li>Course 2</li>
-					<li>Course 3</li>
-				</ul>
+					</a> ';
+					
+	//courses the student is enrolled in	
+	foreach($this->data['courses'] as $course){
+		$string = $string .
+			'<a href="index_router.php?page=lessons&id='.$course->getId().'"><li>
+				<p class="title">'.$counter .'.  <b>'. $course->getTitle() . '</b></p>
+				<p class="description">' . $course->getDescription() . '</p>
+			</li></a>' ;
+		
+		$counter++;
+	
+	}
+	
+	// end of general structure
+	$string = $string . '</ul>
 			</div>
-			<div id="courseDetails">
-				a course\'s details
-			</div>
-		</div>
-	'
-	;
-}
+		</div>';
+	
+	return $string;
+	
+  }
+
 
 }
 ?>

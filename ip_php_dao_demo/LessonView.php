@@ -7,39 +7,39 @@ class LessonView extends LayoutView {
   
   private $data;
   
-  public function __construct($data = null) {
+	public function __construct($data = null) {
 		print_r($data);
 		parent::__construct("Internation Project : lessons", true);
 		$this->data = $data;
-  }
-  
-  public function setData($data) {
-	$this->data = $data;
-	// debug
-	//error_log(print_r($data, true));
-  }
-
-  public function content() {
-  
-	$string = "";
-	$counter = 1;
-	foreach($this->data['lessons'] as &$lesson){
-		
-		$string = $string ."<table border = 1><tr><td>".$counter .".- <b>". $lesson->getTitle() . "</b></td></tr><tr><td>" . 
-				  
-				 $lesson->getSubject() . "<br/>" .
-			     $lesson->getDocumentUrl() . "<br/>";
-				 
-		$counter++;
-	
 	}
   
+	public function setData($data) {
+		$this->data = $data;
+		// debug
+		//error_log(print_r($data, true));
+	}
+
+	public function content() {
   
-	return $string;
-	 
-	
-	
-}
+		$string = '<table id="lessonsTable" style="width: 100%" border="1"><tr><th>Name</th><th>Subject</th><th>Document</th><th>Questions</th></tr>';
+		$counter = 1;
+		foreach($this->data['lessons'] as &$lesson){
+			
+			$string = $string . 
+				'<tr>
+					<td><b>'. $lesson->getTitle() . '</b></td>
+					<td>'. $lesson->getSubject() . '</td>
+					<td>'. $lesson->getDocumentUrl() . '</td>
+					<td>No questions</td>
+				</tr>';
+					 
+			$counter++;
+		
+		}
+		
+		$string = $string . '</table>';
+		return $string;
+	}
 
 }
 ?>

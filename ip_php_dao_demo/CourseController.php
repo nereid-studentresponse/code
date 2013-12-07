@@ -6,6 +6,7 @@ require_once "Student.php";
 require_once "Course.php";
 require_once "CourseDAO.php";
 require_once "StudentDAO.php";
+require_once "LessonDAO.php";
 
 /**
  * Controller for both student and teacher
@@ -23,10 +24,11 @@ class CourseController {
     
     $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
     $dao = new CourseDAO($dbc);
+	$daoLesson = new LessonDAO($dbc);
     
     // if the current logged in user is a student
     if ($user instanceof Student) {
-      $courses = $dao->getByStudent($user);
+		$courses = $dao->getByStudent($user);
     }
     
     $data = array( "courses" => $courses);
