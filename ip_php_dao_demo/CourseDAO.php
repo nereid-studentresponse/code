@@ -63,8 +63,8 @@ class CourseDAO {
     echo "<br>Inserting course id=". $course->getId() . " <br>";
 
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare("INSERT INTO `course` (`id`, `title`, `description`) VALUES ( :id, :title, :description) ");
-    $query->bindParam(':id', $course->getId());
+    $query=$dbConnection->prepare("INSERT INTO `course` (`title`, `description`) VALUES (:title, :description) ");
+    //$query->bindParam(':id', $course->getId());
     $query->bindParam(':title', $course->getTitle());
     $query->bindParam(':description', $course->getDescription());
     $count = $query->execute();
