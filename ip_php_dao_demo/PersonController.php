@@ -76,8 +76,10 @@ class PersonController {
     $email = $_POST["email"];
     $password = $_POST["password"];
     
-    $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
+    //new way to get the DB
+    $dbc = DB::withConfig();
     $dao = new StudentDAO($dbc);
+    $person = $dao->getByEmail($email);
     // TODO check if the email actually exists
     if (!$person) {
       $dao = new TeacherDAO($dbc);
@@ -85,6 +87,8 @@ class PersonController {
       //debug
       //error_log('Teacher '. print_r($person, true));
     }
+    //debug
+    //error_log('Person '. print_r($person, true));
     
     if ($this->checkPass($password, $person->getPassword())) {
       session_start();
