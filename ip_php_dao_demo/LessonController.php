@@ -25,8 +25,7 @@ class LessonController {
   public function createLesson() {
    
     
-    // TODO have the passwords and stuff in a config file
-    $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
+    $dbc = DB::withConfig();
     
 	$dao = new LessonDAO($dbc);
 	$lesson = new Lesson(null, $_POST["title"],$_POST["subject"],$_POST["document_url"],$_POST["course_id"]);
@@ -40,7 +39,7 @@ class LessonController {
 
   public function lessonIndex() {
 	$courseId = $_GET["id"];
-    $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
+    $dbc = DB::withConfig();
     $dao = new LessonDAO($dbc);
     
     $lessons = $dao->getByCourse($courseId);

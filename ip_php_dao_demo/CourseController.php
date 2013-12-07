@@ -28,7 +28,7 @@ class CourseController {
   
   public function courseEnroll() {
     // TODO : put the list of courses of all courses available minus the courses of the user
-    $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
+    $dbc = DB::withConfig();
     $dao = new CourseDAO($dbc);
     
     $user = $_SESSION['user'];
@@ -45,7 +45,7 @@ class CourseController {
     $enroll = $_POST["enroll"];
     $user = $_SESSION["user"];
 
-    $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
+    $dbc = DB::withConfig();
     $sdao = new StudentDAO($dbc);
 
     $ok = true;
@@ -70,7 +70,7 @@ class CourseController {
   private function currentUserCourses() {
     $user = $_SESSION['user'];
   
-    $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
+    $dbc = DB::withConfig();
     $dao = new CourseDAO($dbc);
     $daoLesson = new LessonDAO($dbc);
   

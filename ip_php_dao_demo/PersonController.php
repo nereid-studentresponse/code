@@ -24,9 +24,8 @@ class PersonController {
   public function createPerson() {
     // get post data and use the dao to create the right person
     $personType = $_POST["status"];
-    
-    // TODO have the passwords and stuff in a config file
-    $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
+
+    $dbc = DB::withConfig();
     
     $ok = true;
     error_log($personType);
@@ -51,8 +50,7 @@ class PersonController {
     if( $ok == true) {
       $ok = $dao->insert($person);
     }
-    
-    
+
     $data = array( "ok" => $ok);
     $this->view->setData($data);
   }
