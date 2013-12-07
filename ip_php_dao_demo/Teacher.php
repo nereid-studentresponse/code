@@ -17,17 +17,15 @@ class Teacher {
       $this->speciality=$speciality;
   }
 
-  // Constructor from DB row
-  /*
-   * This is not possible, only one constructor per class in PHP
-  function __construct($row) {
-    $this->id=$row['id'];
-    $this->name=$row['name'];
-    $this->email=$row['email'];
-    $this->password=$row['password'];
-    $this->speciality=$row['speciality'];
+  /**
+   * "Constructor" from DB row
+   * Use it this way: Teacher::withRow($row) this will return a new Teacher
+   */
+  public static function withRow( array $row ) {
+    $instance = new self($row['id'], $row['name'], $row['email'], 
+                         $row['password'], $row['speciality']);
+    return $instance;
   }
-  */
   
   function getId() {
     return $this->id;

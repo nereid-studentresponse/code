@@ -26,15 +26,23 @@ class StudentDAO {
     return Student::withRow($result[0]);
   }
 
+  /**
+   * Returns the student if found, false otherwise
+   */
   function getByEmail($email) {
     $dbConnection=$this->dbConnect();
     $query=$dbConnection->prepare("SELECT * FROM student WHERE email=:email;");
     $query->bindParam(":email", $email);
     $query->execute();
-    $result=$query->fetchAll();
+    $result=$query->fetch();
 
+    //debug
     error_log(print_r($result, true));
-    return Student::withRow($result[0]);
+    if(!$result) {
+      return $result;
+    } else  {
+      return Student::withRow($result);
+    }
   }
 
   function insert($student) {

@@ -4,7 +4,7 @@
 include_once "DB.php";
 include_once "Teacher.php";
 
-class TeaherDAO {
+class TeacherDAO {
 
   private $dbh; // This is an instance of Class_DB to be injected in the functions.
   private $table=NULL;
@@ -26,10 +26,36 @@ class TeaherDAO {
     return new Teacher($result[0]);
   }
 
+  /**
+   * Returns the teacher if found, false otherwise
+   */
+  function getByEmail($email) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("SELECT * FROM teacher WHERE email=:email;");
+    $query->bindParam(":email", $email);
+    $query->execute();
+    $result=$query->fetch();
+
+    //debug
+    error_log(print_r($result, true));
+    if(!$result) {
+      return $result;
+    } else  {
+      return Teacher::withRow($result);
+    }
+  }
+
   function insert($teacher) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare('INSERT INTO teacher (\'name\',\'email\',\'password\',\'speciality\') VALUES ('.$teacher->getName().', '.$teacher->getEmail().', '.$teacher->getPassword().', '.$teacher->getSpeciality().');');
-    $query->execute(); 
+    $sql = "INSERT INTO teacher (`name`,`email`,`password`,`speciality`) VALUES (:name, :email, :password, :speciality)";
+    $query=$dbConnection->prepare($sql);
+    $query->bindParam(":name", $teacher->getName());
+    $query->bindParam(":email", $teacher->getEmail());
+    $query->bindParam(":password", $teacher->getPassword());
+    $query->bindParam(":speciality", $teacher->getSpeciality());
+    $count = $query->execute();
+    
+    return $count > 0;
   }
 
   function update($teacher) {

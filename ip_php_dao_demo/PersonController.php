@@ -29,17 +29,23 @@ class PersonController {
     $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
     
     $ok = true;
-    
+    error_log($personType);
     if($personType == "student") {
       $dao = new StudentDAO($dbc);
       // TODO have a better security for the password
       $person = new Student(null, $_POST["firstName"] . ' ' . $_POST["lastName"], 
-                              $_POST["mail"], $this->hashPass($_POST["password"]), $_POST["year"]);
+                              $_POST["mail"], $this->hashPass($_POST["password"]), 
+                              $_POST["year"]);
     } else if($personType == "teacher") {
+      error_log("Teacher");
       $dao = new TeacherDAO($dbc);
-      // TODO same for teacher
+      $person = new Teacher(null, $_POST["firstName"] . ' ' . $_POST["lastName"], 
+                              $_POST["mail"], $this->hashPass($_POST["password"]), 
+                              $_POST["speciality"]);
     } else {
+      // new type of person?
       $ok = false;
+      error_log("none");
     }
     
     if( $ok == true) {
@@ -73,7 +79,12 @@ class PersonController {
     $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
     $dao = new StudentDAO($dbc);
     // TODO check if the email actually exists
-    $person = $dao->getByEmail($email);
+    if (!$person) {
+      $dao = new TeacherDAO($dbc);
+      $person = $dao->getByEmail($email);
+      //debug
+      //error_log('Teacher '. print_r($person, true));
+    }
     
     if ($this->checkPass($password, $person->getPassword())) {
       session_start();

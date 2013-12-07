@@ -20,16 +20,7 @@ class CourseController {
   }
   
   public function courseIndex() {
-    $user = $_SESSION['user'];
-    
-    $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
-    $dao = new CourseDAO($dbc);
-	$daoLesson = new LessonDAO($dbc);
-    
-    // if the current logged in user is a student
-    if ($user instanceof Student) {
-		$courses = $dao->getByStudent($user);
-    }
+    $courses = $this->currentUserCourses();
     
     $data = array( "courses" => $courses);
     $this->view->setData($data);
@@ -53,16 +44,43 @@ class CourseController {
     //error_log(print_r($_POST, true));
     $enroll = $_POST["enroll"];
     $user = $_SESSION["user"];
-    
+
     $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
     $sdao = new StudentDAO($dbc);
-    
+
+    $ok = true;
     foreach ($enroll as &$courseid) {
       // we just need the id to enroll a student.
       $dummyCourse = new Course($courseid, "dummy", "dummy");
-      $sdao->enrollCourse($user, $dummyCourse);
+      $ok = $ok && $sdao->enrollCourse($user, $dummyCourse);
+      
+
     }
-    
+
+      $data = array( "ok" => $ok);
+      $courses = $this->currentUserCourses();
+      $data = array( "courses" => $courses);
+      $this->view->setData($data);
   }
+
+  /**
+   * Returns the courses of the current logged in user.
+   * needs a user to be in the session
+   */
+  private function currentUserCourses() {
+    $user = $_SESSION['user'];
+  
+    $dbc = new DB('localhost', 'srs', 'interpro', 'utGvWqeYyQb5rMZm');
+    $dao = new CourseDAO($dbc);
+    $daoLesson = new LessonDAO($dbc);
+  
+    // if the current logged in user is a student
+    if ($user instanceof Student) {
+      $courses = $dao->getByStudent($user);
+    }
+    // TODO for the teacher
+    return $courses;
+  }
+
 }
 ?>
