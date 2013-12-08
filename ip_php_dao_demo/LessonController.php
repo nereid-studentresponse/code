@@ -3,6 +3,7 @@
 require_once "LessonDAO.php";
 require_once "CourseDAO.php";
 require_once "DB.php";
+require_once "QuestionController.php";
 
 require_once "Lesson.php";
 require_once "Course.php";
@@ -23,8 +24,6 @@ class LessonController {
   }
   
   public function createLesson() {
-   
-    
     $dbc = DB::withConfig();
     
 	$dao = new LessonDAO($dbc);
@@ -39,12 +38,22 @@ class LessonController {
 
   public function lessonIndex() {
 	$courseId = $_GET["id"];
+	$studentId = $_SESSION['user']->getId();
+	
     $dbc = DB::withConfig();
     $dao = new LessonDAO($dbc);
+	$questionController = new QuestionController(null);
     
     $lessons = $dao->getByCourse($courseId);
+	
+	$questions = array();
+	$counter = 0;
+	foreach ($lessons as &$lesson) {
+		$questions[$counter] = $questionController->studentQuestions($lesson->getId(), $studentId);
+		$counter++;
+	}
     
-    $data = array( "lessons" => $lessons);
+    $data = array( "lessons" => $lessons, "questions" => $questions);
     $this->view->setData($data);
   }
   

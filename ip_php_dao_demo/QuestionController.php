@@ -72,6 +72,18 @@ class QuestionController {
     $this->view->setData($data);
   }
   
+  //return all the questions related to a lesson and a student, seperating answered and unanswered questions
+  public function studentQuestions($lessonId, $studentId) {
+    $dbc = DB::withConfig();
+    $dao = new FreeQuestionDAO($dbc);
+    
+    $answered = $dao->getAnsweredQuestions($studentId, $lessonId);
+	$unanswered = $dao->getUnansweredQuestions($studentId, $lessonId);
+    
+    $data = array( "answered" => $answered, "unanswered" => $unanswered);
+    return $data;
+  }
+  
   public function teacherAnswersIndex() {
   //This function displays all the answers that the teacher has received from a certain question
 	$questionId = $_GET["question_id"];

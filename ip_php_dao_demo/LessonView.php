@@ -22,15 +22,35 @@ class LessonView extends LayoutView {
 	public function content() {
   
 		$string = '<table id="lessonsTable" style="width: 100%" border="1"><tr><th>Name</th><th>Subject</th><th>Document</th><th>Questions</th></tr>';
-		$counter = 1;
-		foreach($this->data['lessons'] as &$lesson){
+		$counter = 0;
+		foreach($this->data['lessons'] as &$lesson) {
 			
 			$string = $string . 
 				'<tr>
 					<td><b>'. $lesson->getTitle() . '</b></td>
 					<td>'. $lesson->getSubject() . '</td>
-					<td>'. $lesson->getDocumentUrl() . '</td>
-					<td>No questions</td>
+					<td>';
+					
+			if ($lesson->getDocumentUrl()) { 
+				$string = $string . '<a href='. $lesson->getDocumentUrl() . '>Document</a>';
+			} else { 
+				$string = $string . 'No document';
+			} 
+			
+			$string = $string . '</td>
+					<td>';
+			
+			if ( $this->data['questions'][$counter]['unanswered'] ) {
+				$string = $string . '<ul>';
+				foreach ($this->data['questions'][$counter]['unanswered'] as &$question) {
+					$string = $string . '<li>Question</li>';
+				}
+				$string = $string . '</ul>';
+			} else {
+				$string = $string . 'No question';
+			}
+			
+			$string = $string . '</td>
 				</tr>';
 					 
 			$counter++;
