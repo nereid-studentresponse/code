@@ -38,13 +38,13 @@ class LessonController {
   
 
   public function lessonIndex() {
-	$courseId = $_GET["id"];
+	$courseId = $_GET["course_id"];
     $dbc = DB::withConfig();
     $dao = new LessonDAO($dbc);
     
     $lessons = $dao->getByCourse($courseId);
     
-    $data = array( "course" => $course, "lessons" => $lessons);
+    $data = array( "lessons" => $lessons);
     $this->view->setData($data);
   }
   

@@ -63,9 +63,29 @@ class FreeQuestionDAO {
     return $fquestionArray;
   }
   
-  function getUnasweredQuestions($studentId,$lessonId) {
+  function getUnansweredQuestions($studentId,$lessonId) {
     $dbConnection=$this->dbConnect();
     $query=$dbConnection->prepare("SELECT q.id, q.title, q.correction, q.id_lesson FROM freequestion q WHERE q.id NOT IN (SELECT a.id_question FROM freeanswer a WHERE a.id_student = :sid) AND q.id_lesson = :lid ");
+	$query->bindParam(':sid', $studentId);
+    $query->bindParam(':lid', $lessonId);
+    $query->execute();
+    $result=$query->fetchAll();
+     
+    $fquestionArray = array();
+    $arrayCounter = 0;
+    
+    foreach ($result as &$row) {
+      $tempFquestion = new FreeQuestion($row['id'], $row['title'], $row['correction'], $row['id_lesson']);
+      $fquestionArray[$arrayCounter] = $tempFquestion;
+      $arrayCounter++;
+    }
+
+    return $fquestionArray;
+  }
+  
+  function getAnsweredQuestions($studentId,$lessonId) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("SELECT q.id, q.title, q.correction, q.id_lesson FROM freequestion q WHERE q.id IN (SELECT a.id_question FROM freeanswer a WHERE a.id_student = :sid) AND q.id_lesson = :lid ");
 	$query->bindParam(':sid', $studentId);
     $query->bindParam(':lid', $lessonId);
     $query->execute();
