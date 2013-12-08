@@ -38,7 +38,7 @@ class LessonController {
   
 
   public function lessonIndex() {
-	$courseId = $_GET["course_id"];
+	$courseId = $_GET["id"];
     $dbc = DB::withConfig();
     $dao = new LessonDAO($dbc);
     
