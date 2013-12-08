@@ -20,10 +20,18 @@ class CourseController {
   }
   
   public function courseIndex() {
-    $courses = $this->currentUserCourses();
-    
-    $data = array( "courses" => $courses);
-    $this->view->setData($data);
+	$user = $_SESSION['user'];
+	// if the current logged in user is a student
+    if ($user instanceof Student) {
+		$userType = "student";
+    } else {
+		$userType = "teacher";
+	}
+	
+	$courses = $this->currentUserCourses();
+	
+	$data = array( "courses" => $courses, "userType" => $userType);
+	$this->view->setData($data);
   }
   
   public function courseEnroll() {
@@ -76,8 +84,11 @@ class CourseController {
   
     // if the current logged in user is a student
     if ($user instanceof Student) {
-      $courses = $dao->getByStudent($user);
-    }
+		$courses = $dao->getByStudent($user);
+    } else {
+		$courses = $dao->getByTeacher($user);
+	}
+	
     // TODO for the teacher
     return $courses;
   }

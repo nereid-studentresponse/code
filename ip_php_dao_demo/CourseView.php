@@ -23,13 +23,25 @@ class CourseView extends LayoutView {
 	$string = '<div id="coursesBlock">
 			<div id="menu">
 				<p class="title bold">My courses</p>
-				<ul class="list">
-					<a href="index_router.php?page=enroll">
+				<ul class="list">';
+	
+	if ( $this->data['userType'] === 'student') {
+		//for a student
+		$string = $string . '<a href="index_router.php?page=enroll">
 						<li class="add">
 							<img src="./css/images/add-icon.png" height="15" width="16" />
 							Enroll a new course
 						</li>
-					</a> ';
+					</a>';
+	} else {
+		// for a teacher
+		$string = $string . '<a href="index_router.php?page=create">
+						<li class="add">
+							<img src="./css/images/add-icon.png" height="15" width="16" />
+							Create a new course
+						</li>
+					</a>';
+	}
 					
 	//courses the student is enrolled in	
 	foreach($this->data['courses'] as $course){

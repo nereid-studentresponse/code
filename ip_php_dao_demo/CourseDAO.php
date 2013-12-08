@@ -114,6 +114,29 @@ class CourseDAO {
 
     return $courseArray;
   }
+  
+   /**
+   * Get all the courses a teacher is responsible for
+   */
+  function getByTeacher($teacher) {
+    $dbConnection=$this->dbConnect();
+    $query=$dbConnection->prepare("SELECT c.id, c.title, c.description FROM course c JOIN create e ON c.id = e.id_course WHERE e.id_teacher = :sid ");
+    $query->bindParam(':sid', $teacher->getId());
+    $query->execute();
+    $result=$query->fetchAll();
+    
+    
+    $courseArray = array();
+    $arrayCounter = 0;
+    
+    foreach ($result as &$row) {
+      $tempCourse = new Course($row['id'], $row['title'], $row['description']);
+      $courseArray[$arrayCounter] = $tempCourse;
+      $arrayCounter++;
+    }
+
+    return $courseArray;
+  }
 
   /**
    * Returns the courses avaible for a given student. For now just returns courses he's not enrolled in.
