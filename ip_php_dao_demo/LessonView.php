@@ -2,6 +2,7 @@
 require_once "LayoutView.php";
 require_once "Lesson.php";
 require_once "Course.php";
+require_once "FreeQuestion.php";
 
 class LessonView extends LayoutView {
   
@@ -16,7 +17,7 @@ class LessonView extends LayoutView {
 	public function setData($data) {
 		$this->data = $data;
 		// debug
-		//error_log(print_r($data, true));
+		error_log(print_r($data, true));
 	}
 
 	public function content() {
@@ -49,7 +50,7 @@ class LessonView extends LayoutView {
 				if ( $this->data['questions'][$counter]['unanswered'] ) {
 					$string = $string . '<ul>';
 					foreach ($this->data['questions'][$counter]['unanswered'] as &$question) {
-						$string = $string . '<li>Question</li>';
+						$string = $string . '<li>Question: '.$question->getTitle().'</li>';
 					}
 					$string = $string . '</ul>';
 				} else {
