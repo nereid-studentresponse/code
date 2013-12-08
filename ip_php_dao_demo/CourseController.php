@@ -47,6 +47,11 @@ class CourseController {
     $this->view->setData($data);
   }
   
+	//displays the courseCreateView
+	public function courseCreate() {
+
+	}
+  
   public function courseEnrollPost() {
     // debug
     //error_log(print_r($_POST, true));
@@ -64,6 +69,21 @@ class CourseController {
       
 
     }
+
+      $data = array( "ok" => $ok);
+      $courses = $this->currentUserCourses();
+      $data = array( "courses" => $courses);
+      $this->view->setData($data);
+  }
+  
+   public function courseCreatePost() {
+    // debug
+    //error_log(print_r($_POST, true));
+    // $enroll = $_POST["create"];
+    // $user = $_SESSION["user"];
+
+    // $dbc = DB::withConfig();
+    // $sdao = new StudentDAO($dbc);
 
       $data = array( "ok" => $ok);
       $courses = $this->currentUserCourses();

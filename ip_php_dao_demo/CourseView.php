@@ -43,7 +43,7 @@ class CourseView extends LayoutView {
 					</a>';
 	}
 					
-	//courses the student is enrolled in	
+	//courses the student is enrolled in, or the teacher has created
 	foreach($this->data['courses'] as $course){
 		$string = $string .
 			'<a href="index_router.php?page=lessons&id='.$course->getId().'"><li>

@@ -7,6 +7,7 @@ require_once "CourseView.php";
 require_once "CourseEnrollView.php";
 require_once "LoggedOutView.php";
 require_once "LessonView.php";
+require_once "CourseCreateView.php";
 
 
 // controllers
@@ -40,6 +41,10 @@ if (!empty($page)) {
                             'controller' => 'CourseController', 
                             'action' => 'courseEnroll',
                             'auth' => true),
+		'createCourse' => array('view' => 'CourseCreateView', 
+                            'controller' => 'CourseController', 
+                            'action' => 'courseCreate',
+                            'auth' => true),
 		'logout' => array('view' => 'LoggedOutView', 
                             'controller' => 'PersonController', 
                             'action' => 'logout',
@@ -63,7 +68,11 @@ if (!empty($page)) {
 		'enroll' => array('view' => 'CourseView', 
                             'controller' => 'CourseController', 
                             'action' => 'courseEnrollPost',
-                            'auth' => true)
+                            'auth' => true),
+		'createCourse' => array('view' => 'CourseCreateView', 
+                            'controller' => 'CourseController', 
+                            'action' => 'courseCreatePost',
+                            'auth' => true),
     );
     
     // will have the array corresponding to the desired action
