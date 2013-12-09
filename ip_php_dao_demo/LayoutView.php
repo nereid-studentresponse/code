@@ -35,6 +35,7 @@ class LayoutView {
 		<link rel="stylesheet" href="./css/index.css">
 		<link rel="stylesheet" href="./css/courses.css">
 		<link rel="stylesheet" href="./css/register.css">
+		<link rel="stylesheet" href="./css/lessons.css">
 		
     </head>
     <body>

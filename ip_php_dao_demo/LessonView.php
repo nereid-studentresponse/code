@@ -22,11 +22,11 @@ class LessonView extends LayoutView {
 
 	public function content() {
   
-		$string = '<a href="index_router.php?page=myCourses">Return on my courses</a>';
+		$string = '<div id="lessonView"><a href="index_router.php?page=myCourses">Return on my courses</a>';
 		
 		if ( $this->data['lessons'] ) {
 		
-			$string = $string . '<table id="lessonsTable" style="width: 100%" border="1"><tr><th>Name</th><th>Subject</th><th>Document</th><th>Questions</th></tr>';
+			$string = $string . '<table id="lessonsTable" style="width: 100%" border="1"><tr><th>Name</th><th>Subject</th><th>Document</th><th>Questions you can answer</th></tr>';
 			
 			$counter = 0;
 
@@ -48,9 +48,9 @@ class LessonView extends LayoutView {
 						<td>';
 				
 				if ( $this->data['questions'][$counter]['unanswered'] ) {
-					$string = $string . '<ul>';
+					$string = $string . '<ul class="questions">';
 					foreach ($this->data['questions'][$counter]['unanswered'] as &$question) {
-						$string = $string . '<li>Question: '.$question->getTitle().'</li>';
+						$string = $string . '<li><a href="index_router.php?page=fQuestion&qid='.$question->getId().'">'.$question->getTitle().'</a></li>';
 					}
 					$string = $string . '</ul>';
 				} else {
@@ -67,7 +67,7 @@ class LessonView extends LayoutView {
 			$string = $string . '<p>There is no lesson in this course for now</p>';
 		}
 		
-		$string = $string . '</table>';
+		$string = $string . '</table></div>';
 		return $string;
 	}
 

@@ -106,7 +106,7 @@ class CourseController {
     if ($user instanceof Student) {
 		$courses = $dao->getByStudent($user);
     } else {
-		$courses = $dao->getByTeacher($user);
+		$courses = $dao->getByStudent($user);
 	}
 	
     // TODO for the teacher

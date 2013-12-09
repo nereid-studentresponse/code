@@ -87,7 +87,17 @@
 /* ============================================ CourseEnrollView ========================================================== */
 #courseCreate #courseCreationForm {
 	width: 100%!important;
-	max-width: 100%!important;
+	max-width: 500px!important;
+}
+
+#courseCreate fieldset {
+	border: none;
+}
+
+#courseCreate  legend {
+	border-bottom: 2px dashed #FF6633;
+	text-align: center;
+	width: 100%;
 }
 
 #courseCreate input {

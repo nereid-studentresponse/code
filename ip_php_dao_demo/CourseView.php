@@ -35,7 +35,7 @@ class CourseView extends LayoutView {
 					</a>';
 	} else {
 		// for a teacher
-		$string = $string . '<a href="index_router.php?page=create">
+		$string = $string . '<a href="index_router.php?page=createCourse">
 						<li class="add">
 							<img src="./css/images/add-icon.png" height="15" width="16" />
 							Create a new course
