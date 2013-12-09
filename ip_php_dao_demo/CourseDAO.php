@@ -103,7 +103,7 @@ class CourseDAO {
     $result=$query->fetchAll();
     
     
-    $courseArray;
+    $courseArray = array();
     $arrayCounter = 0;
     
     foreach ($result as &$row) {
@@ -120,7 +120,7 @@ class CourseDAO {
    */
   function getByTeacher($teacher) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare("SELECT c.id, c.title, c.description FROM course c JOIN create e ON c.id = e.id_course WHERE e.id_teacher = :sid ");
+    $query=$dbConnection->prepare("SELECT c.id, c.title, c.description FROM course c JOIN creation cr ON c.id = cr.id_course WHERE cr.id_teacher = :sid ");
     $query->bindParam(':sid', $teacher->getId());
     $query->execute();
     $result=$query->fetchAll();

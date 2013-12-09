@@ -96,10 +96,10 @@ CREATE TABLE IF NOT EXISTS `course` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `create`
+-- Estructura de tabla para la tabla `creation`
 --
 
-CREATE TABLE IF NOT EXISTS `create` (
+CREATE TABLE IF NOT EXISTS `creation` (
   `id_teacher` int(11) NOT NULL,
   `id_course` int(11) NOT NULL,
   UNIQUE KEY `id_teacher_2` (`id_teacher`,`id_course`),
@@ -318,11 +318,11 @@ ALTER TABLE `contain_fquestion`
   ADD CONSTRAINT `contain_fquestion_ibfk_2` FOREIGN KEY (`id_lesson`) REFERENCES `lesson` (`id`);
 
 --
--- Filtros para la tabla `create`
+-- Filtros para la tabla `creation`
 --
-ALTER TABLE `create`
-  ADD CONSTRAINT `create_ibfk_1` FOREIGN KEY (`id_teacher`) REFERENCES `teacher` (`id`),
-  ADD CONSTRAINT `create_ibfk_2` FOREIGN KEY (`id_course`) REFERENCES `course` (`id`);
+ALTER TABLE `creation`
+  ADD CONSTRAINT `creation_ibfk_1` FOREIGN KEY (`id_teacher`) REFERENCES `teacher` (`id`),
+  ADD CONSTRAINT `creation_ibfk_2` FOREIGN KEY (`id_course`) REFERENCES `course` (`id`);
 
 --
 -- Filtros para la tabla `enroll`
