@@ -15,6 +15,8 @@ require_once "Student.php";
 class QuestionController {
 
   private $view;
+  // the data to give to the view
+  private $data;
   
   public function __construct($view) {
     $this->view = $view;
@@ -24,31 +26,53 @@ class QuestionController {
    
     $dbc = DB::withConfig();
     
-	$dao = new FreeQuestionDAO($dbc);
-	$fquestion = new FreeQuestion(null, $_POST["title"],$_POST["correction"],$_POST["id_lesson"]);
-	$ok = $dao->insert($fquestion);
-	   
+    $dao = new FreeQuestionDAO($dbc);
+    $fquestion = new FreeQuestion(null, $_POST["title"],$_POST["correction"],$_POST["id_lesson"]);
+    $ok = $dao->insert($fquestion);
+       
     $data = array( "ok" => $ok);
     $this->view->setData($data);
-	
+    
   }
  
-  public function createFreeAnswer() {
-	//answering a question
+  public function submitAnswer() {
+    //answering a question
     $dbc = DB::withConfig();
+    $type = $_GET["type"];
+    $qid = $_GET["qid"];
+    $user = $_SESSION["user"];
     
-	$dao = new FreeAnswerDAO($dbc);
-	$fanswer = new FreeAnswer(null, $_POST["text"],$_POST["id_student"],$_POST["id_question"]);
-	$ok = $dao->insert($fanswer);
-	   
-    $data = array( "ok" => $ok);
-    $this->view->setData($data);
-	
+    if ($type == "free") {
+      $dao = new FreeAnswerDAO($dbc);
+      $answer = new FreeAnswer(null, 
+                                $_POST["freeAnswer"],
+                                $user->getId(),
+                                $_GET["qid"]);
+      $this->fQuestionIndex();
+    } else {
+      //TODO for the choice answers
+    }
+    $ok = $dao->insert($answer);
+    
+#    $this->data["answer"] = $answer;
+    $this->data["ok"] = $ok;
+    $this->view->setData($this->data);
+    
+  }
+
+  public function fQuestionIndex() {
+    $dbc = DB::withConfig();
+    $qid = $_GET["qid"];
+
+    $dao = new FreeQuestionDAO($dbc);
+    $question = $dao->get($qid);
+    $this->data["question"] = $question;
+    $this->view->setData($this->data);
   }
 
   public function teacherQuestionsIndex() {
   //This function displays all the questions that the teacher has written in a certain lesson
-	$lessonId = $_GET["lesson_id"];
+    $lessonId = $_GET["lesson_id"];
     $dbc = DB::withConfig();
     $dao = new FreeQuestionDAO($dbc);
     
@@ -59,14 +83,14 @@ class QuestionController {
   }
   
   public function studentQuestionsIndex() {
-	$lessonId = $_GET["lesson_id"];
-	$studentId = $_SESSION['user']->getId();
-	
+    $lessonId = $_GET["lesson_id"];
+    $studentId = $_SESSION['user']->getId();
+    
     $dbc = DB::withConfig();
     $dao = new FreeQuestionDAO($dbc);
     
     $answered = $dao->getAnsweredQuestions($studentId, $lessonId);
-	$unanswered = $dao->getUnansweredQuestions($studentId, $lessonId);
+    $unanswered = $dao->getUnansweredQuestions($studentId, $lessonId);
     
     $data = array( "answered" => $answered, "unanswered" => $unanswered);
     $this->view->setData($data);
@@ -78,7 +102,7 @@ class QuestionController {
     $dao = new FreeQuestionDAO($dbc);
     
     $answered = $dao->getAnsweredQuestions($studentId, $lessonId);
-	$unanswered = $dao->getUnansweredQuestions($studentId, $lessonId);
+    $unanswered = $dao->getUnansweredQuestions($studentId, $lessonId);
     
     $data = array( "answered" => $answered, "unanswered" => $unanswered);
     return $data;
@@ -86,10 +110,10 @@ class QuestionController {
   
   public function teacherAnswersIndex() {
   //This function displays all the answers that the teacher has received from a certain question
-	$questionId = $_GET["question_id"];
+    $questionId = $_GET["question_id"];
     $dbc = DB::withConfig();
     
-	$dao = new FreeAnswerDAO($dbc);
+    $dao = new FreeAnswerDAO($dbc);
     
     $answers = $dao->getByQuestion($questionId);
     

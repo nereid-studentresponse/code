@@ -35,9 +35,9 @@ class FreeAnswerDAO {
    
     $dbConnection=$this->dbConnect();
     $query=$dbConnection->prepare("INSERT INTO `freeanswer` (`text`, `id_student`, `id_question`) VALUES ( :text, :id_student, :id_question) ");
-    $query->bindParam(':title', $fanswer->getTitle());
+    $query->bindParam(':text', $fanswer->getText());
     $query->bindParam(':id_student', $fanswer->getStudentId());
-	$query->bindParam(':id_question', $fanswer->getQuestionId());
+    $query->bindParam(':id_question', $fanswer->getQuestionId());
     $count = $query->execute();
     
     return $count > 0;
