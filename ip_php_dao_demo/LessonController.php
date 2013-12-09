@@ -38,8 +38,15 @@ class LessonController {
 
   public function lessonIndex() {
     $courseId = $_GET["id"];
-    $studentId = $_SESSION['user']->getId();
-    
+	$user = $_SESSION['user'];
+	
+	// if the current logged in user is a student
+    if ($user instanceof Student) {
+		$userType = "student";
+    } else {
+		$userType = "teacher";
+	}
+	
     $dbc = DB::withConfig();
     $dao = new LessonDAO($dbc);
     $questionController = new QuestionController(null);
@@ -49,11 +56,11 @@ class LessonController {
     $questions = array();
     $counter = 0;
     foreach ($lessons as &$lesson) {
-        $questions[$counter] = $questionController->studentQuestions($lesson->getId(), $studentId);
+        $questions[$counter] = $questionController->studentQuestions($lesson->getId(), $user->getId());
         $counter++;
     }
     
-    $data = array( "lessons" => $lessons, "questions" => $questions);
+    $data = array( "lessons" => $lessons, "questions" => $questions, "userType" => $userType );
     $this->view->setData($data);
   }
   

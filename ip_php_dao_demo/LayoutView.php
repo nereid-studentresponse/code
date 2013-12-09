@@ -7,7 +7,7 @@ class LayoutView {
   protected $title; //what is displayed on the header
   protected $authenticated; // true if the user is authenticated, so that we display the menu
   
-  public function __construct($title = "Internation Project : student response", $authenticated = null) {
+  public function __construct($title = "International Project : student response", $authenticated = null) {
     $this->title = $title; //default title
     if($authenticated != null) {
       $this->authenticated = $authenticated;

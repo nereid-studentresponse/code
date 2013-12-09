@@ -68,3 +68,37 @@ input[type=submit]:hover {
 span.bold {
 	font-weight: bold;
 }
+
+.button {
+	text-align: left!important;
+	padding: 4px 10px;
+	margin: 10px;
+	color: black;
+	text-decoration: none;
+	background-color:#FF9966;
+	-webkit-border-top-left-radius:20px;
+	-moz-border-radius-topleft:20px;
+	border-top-left-radius:20px;
+	-webkit-border-top-right-radius:20px;
+	-moz-border-radius-topright:20px;
+	border-top-right-radius:20px;
+	-webkit-border-bottom-right-radius:20px;
+	-moz-border-radius-bottomright:20px;
+	border-bottom-right-radius:20px;
+	-webkit-border-bottom-left-radius:20px;
+	-moz-border-radius-bottomleft:20px;
+	border-bottom-left-radius:20px;
+	text-indent:0;
+	border:1px solid #eeb44f;
+	display:inline-block;
+	color:#ffffff;
+	font-weight:bold;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #cc9f52;
+}
+
+.button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #FF9966), color-stop(1, #ffc477) );
+	background:-moz-linear-gradient( center top, #FF9966 5%, #ffc477 100% );
+}

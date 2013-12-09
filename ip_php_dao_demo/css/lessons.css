@@ -1,3 +1,11 @@
+#lessonView {
+	text-align: left!important;
+}
+
+#lessonView table {
+	text-align: center!important;
+}
+
 #lessonView .questions {
 	list-style: none;
 }

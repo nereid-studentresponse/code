@@ -10,7 +10,7 @@ class LessonView extends LayoutView {
   
 	public function __construct($data = null) {
 		print_r($data);
-		parent::__construct("Internation Project : lessons", true);
+		parent::__construct("International Project : lessons", true);
 		$this->data = $data;
 	}
   
@@ -22,7 +22,7 @@ class LessonView extends LayoutView {
 
 	public function content() {
   
-		$string = '<div id="lessonView"><a href="index_router.php?page=myCourses">Return on my courses</a>';
+		$string = '<div id="lessonView"><a href="index_router.php?page=myCourses" class="button">Return on my courses</a>';
 		
 		if ( $this->data['lessons'] ) {
 		
@@ -67,7 +67,14 @@ class LessonView extends LayoutView {
 			$string = $string . '<p>There is no lesson in this course for now</p>';
 		}
 		
-		$string = $string . '</table></div>';
+		$string = $string . '</table>';
+		
+		if ( $this->data['userType'] === 'teacher') {
+			//a teacher can create lessons in the course
+			$string = $string . '<a href="index_router.php?page=createLesson" class="button">Add a lesson</a>';
+		}
+		
+		$string = $string . '</div>';
 		return $string;
 	}
 

@@ -19,7 +19,7 @@ class CourseCreateView extends LayoutView {
 	
 	//enroll course + general structure
 	$string = '<div id="courseCreate">
-					<form action="index_router.php?page=courseCreate" method="post" id="courseCreationForm" class="form">
+					<form name="create" action="index_router.php?page=createCourse" method="post" id="courseCreationForm" class="form">
 						<fieldset id="globalInformation">
 							<legend>Course creation : </legend>
 							<div id="title" class="formBlock">

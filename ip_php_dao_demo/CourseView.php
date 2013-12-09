@@ -5,7 +5,7 @@ class CourseView extends LayoutView {
   
   private $data;
   public function __construct($data = null) {
-		parent::__construct("Internation Project : my courses !", true);
+		parent::__construct("International Project : my courses", true);
 		$this->data = $data;
   }
   

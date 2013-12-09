@@ -6,6 +6,7 @@ require_once "Student.php";
 require_once "Course.php";
 require_once "CourseDAO.php";
 require_once "StudentDAO.php";
+require_once "TeacherDAO.php";
 require_once "LessonDAO.php";
 
 /**
@@ -79,16 +80,19 @@ class CourseController {
    public function courseCreatePost() {
     // debug
     //error_log(print_r($_POST, true));
-    // $enroll = $_POST["create"];
-    // $user = $_SESSION["user"];
+	$user = $_SESSION["user"];
 
-    // $dbc = DB::withConfig();
-    // $sdao = new StudentDAO($dbc);
+	$dbc = DB::withConfig();
+	$tdao = new TeacherDAO($dbc);
+	$cdao = new CourseDAO($dbc);
+		
+	$newCourse = new Course(null, $_POST["title"], $_POST["description"]);
+	
+	$array = $cdao->insert($newCourse, $user);
 
-      $data = array( "ok" => $ok);
-      $courses = $this->currentUserCourses();
-      $data = array( "courses" => $courses);
-      $this->view->setData($data);
+	// $courses = $this->currentUserCourses();
+	// $data = array( "courses" => $courses);
+	header('Location: index_router.php?page=lessons&id='.$array['courseId']);
   }
 
   /**

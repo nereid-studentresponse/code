@@ -59,7 +59,8 @@ class CourseDAO {
     return $courseArray;
   }
   
-  function insert($course) {
+  //create a course and bind it to the teacher
+  function insert($course, $teacher) {
     echo "<br>Inserting course id=". $course->getId() . " <br>";
 
     $dbConnection=$this->dbConnect();
@@ -67,9 +68,17 @@ class CourseDAO {
     //$query->bindParam(':id', $course->getId());
     $query->bindParam(':title', $course->getTitle());
     $query->bindParam(':description', $course->getDescription());
-    $count = $query->execute();
+	
+	$count = $query->execute();
+	$courseId = $dbConnection->lastInsertId();
+	
+	$query2=$dbConnection->prepare("INSERT INTO `creation` (`id_course`, `id_teacher`) VALUES (:id_course, :id_teacher) ");
+	$query2->bindParam(':id_course', $courseId);
+    $query2->bindParam(':id_teacher', $teacher->getId());
+	
+    $count = $count && $query2->execute();
     
-    return $count > 0;
+    return array("result" => $count > 0, "courseId" => $courseId);
   }
 
   function update($course) {
