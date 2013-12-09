@@ -25,64 +25,6 @@ USE `srs`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `choiceanswer`
---
-
-CREATE TABLE IF NOT EXISTS `choiceanswer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `number` int(11) NOT NULL,
-  `id_student` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`,`id_student`),
-  KEY `id_student` (`id_student`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `choicequestion`
---
-
-CREATE TABLE IF NOT EXISTS `choicequestion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `numberofanswer` int(11) NOT NULL,
-  `nbchoices` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `contain_chquestion`
---
-
-CREATE TABLE IF NOT EXISTS `contain_chquestion` (
-  `id_chquestion` int(11) NOT NULL,
-  `id_lesson` int(11) NOT NULL,
-  UNIQUE KEY `id_chquestion_2` (`id_chquestion`,`id_lesson`),
-  KEY `id_chquestion` (`id_chquestion`),
-  KEY `id_lesson` (`id_lesson`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `contain_fquestion`
---
-
-CREATE TABLE IF NOT EXISTS `contain_fquestion` (
-  `id_fquestion` int(11) NOT NULL,
-  `id_lesson` int(11) NOT NULL,
-  UNIQUE KEY `id_fquestion_2` (`id_fquestion`,`id_lesson`),
-  KEY `id_fquestion` (`id_fquestion`),
-  KEY `id_lesson` (`id_lesson`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `course`
 --
 
@@ -133,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `freeanswer` (
   `id_student` int(11) NOT NULL,
   `id_question` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`,`id_student`,`id_question`),
+  UNIQUE KEY `id` (`id_student`,`id_question`),
   KEY `id_student` (`id_student`),
   KEY `id_question` (`id_question`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -297,25 +239,6 @@ CREATE TABLE IF NOT EXISTS `teacherof` (
 -- Restricciones para tablas volcadas
 --
 
---
--- Filtros para la tabla `choiceanswer`
---
-ALTER TABLE `choiceanswer`
-  ADD CONSTRAINT `choiceanswer_ibfk_1` FOREIGN KEY (`id_student`) REFERENCES `student` (`id`);
-
---
--- Filtros para la tabla `contain_chquestion`
---
-ALTER TABLE `contain_chquestion`
-  ADD CONSTRAINT `contain_chquestion_ibfk_1` FOREIGN KEY (`id_chquestion`) REFERENCES `choicequestion` (`id`),
-  ADD CONSTRAINT `contain_chquestion_ibfk_2` FOREIGN KEY (`id_lesson`) REFERENCES `lesson` (`id`);
-
---
--- Filtros para la tabla `contain_fquestion`
---
-ALTER TABLE `contain_fquestion`
-  ADD CONSTRAINT `contain_fquestion_ibfk_1` FOREIGN KEY (`id_fquestion`) REFERENCES `freequestion` (`id`),
-  ADD CONSTRAINT `contain_fquestion_ibfk_2` FOREIGN KEY (`id_lesson`) REFERENCES `lesson` (`id`);
 
 --
 -- Filtros para la tabla `creation`
@@ -356,19 +279,6 @@ ALTER TABLE `lesson`
 ALTER TABLE `note`
   ADD CONSTRAINT `note_ibfk_2` FOREIGN KEY (`id_student`) REFERENCES `student` (`id`),
   ADD CONSTRAINT `note_ibfk_1` FOREIGN KEY (`id_lesson`) REFERENCES `lesson` (`id`);
-
---
--- Filtros para la tabla `option`
---
-ALTER TABLE `option`
-  ADD CONSTRAINT `option_ibfk_1` FOREIGN KEY (`id_chquestion`) REFERENCES `choicequestion` (`id`);
-
---
--- Filtros para la tabla `selected_options`
---
-ALTER TABLE `selected_options`
-  ADD CONSTRAINT `selected_options_ibfk_1` FOREIGN KEY (`id_chanswer`) REFERENCES `choiceanswer` (`id`),
-  ADD CONSTRAINT `selected_options_ibfk_2` FOREIGN KEY (`id_option`) REFERENCES `option` (`id`);
 
 --
 -- Filtros para la tabla `studentof`
