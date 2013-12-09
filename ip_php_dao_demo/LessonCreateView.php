@@ -1,11 +1,11 @@
 <?php
 require_once "LayoutView.php";
 
-class CourseCreateView extends LayoutView {
+class LessonCreateView extends LayoutView {
   
   private $data;
   public function __construct($data = null) {
-		parent::__construct("International Project : course creation", true);
+		parent::__construct("International Project : lesson creation", true);
 		$this->data = $data;
   }
   
@@ -18,21 +18,21 @@ class CourseCreateView extends LayoutView {
   public function content() {
 	
 	//enroll course + general structure
-	$string = '<div id="courseCreate">
-					<form name="create" action="index_router.php?page=createCourse" method="post" id="courseCreationForm" class="form">
+	$string = '<div id="lessonCreate">
+					<form name="create" action="index_router.php?page=createLesson&id='.$_GET["id"].'" method="post" id="lessonCreationForm" class="form">
 						<fieldset id="globalInformation">
 							<legend>Course creation : </legend>
 							<div id="title" class="formBlock">
 								<label for="title">Title :</label>
 								<input type="text" name="title" />
 							</div>
-							<div id="description" class="formBlock">
-								<label for="descritpion">Description :</label>
-								<textarea cols="40" rows="5" name="description" id="description"></textarea>
+							<div id="subject" class="formBlock">
+								<label for="subject">Subject :</label>
+								<textarea cols="40" rows="5" name="subject" id="subject"></textarea>
 							</div>
 						</fieldset>
 
-						<a href="index_router.php?page=myCourses"><input id="back" type="button" value="Cancel"/></a>
+						<a href="index_router.php?page=lessons&id='.$_GET['id'].'"><input id="back" type="button" value="Cancel"/></a>
 						<input type="submit" value="Confirm"/>
 					</form>
 				</div>';

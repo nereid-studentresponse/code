@@ -64,6 +64,26 @@ class LessonController {
     $this->view->setData($data);
   }
   
+  	//displays the lessonCreateView
+	public function lessonCreate() {
+
+	}
+	
+  public function lessonCreatePost() {
+    // debug
+    //error_log(print_r($_POST, true));
+
+	$dbc = DB::withConfig();
+	$ldao = new LessonDAO($dbc);
+		
+	$newLesson = new Lesson(null, $_POST["title"], $_POST["subject"], null, 1);
+	
+	$ldao->insert($newLesson);
+
+    //redirection towards the course page
+	header('Location: index_router.php?page=lessons&id='.$_GET["id"]);
+  }
+  
  }
 
 

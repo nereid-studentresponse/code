@@ -67,8 +67,6 @@ class CourseController {
       // we just need the id to enroll a student.
       $dummyCourse = new Course($courseid, "dummy", "dummy");
       $ok = $ok && $sdao->enrollCourse($user, $dummyCourse);
-      
-
     }
 
       $data = array( "ok" => $ok);
@@ -90,8 +88,7 @@ class CourseController {
 	
 	$array = $cdao->insert($newCourse, $user);
 
-	// $courses = $this->currentUserCourses();
-	// $data = array( "courses" => $courses);
+    //redirection towards the course page
 	header('Location: index_router.php?page=lessons&id='.$array['courseId']);
   }
 

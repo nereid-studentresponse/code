@@ -25,9 +25,14 @@ class LessonDAO {
 	return Lesson::withRow($result[0]);
   }
 
+  //insert a lesson into database
   function insert($lesson) {
     $dbConnection=$this->dbConnect();
-    $query=$dbConnection->prepare('INSERT INTO lesson (\'title\',\'subject\',\'document_url\',\'id_course\') VALUES ('.$lesson->getTitle().', '.$lesson->getSubject().', '.$lesson->getDocumentUrl().', '.$lesson->getCourseId().');');
+    $query=$dbConnection->prepare("INSERT INTO `lesson` (`title`,`subject`,`document_url`,`id_course`) VALUES (:title, :subject, :documentUrl, :course_id)");
+	$query->bindParam(':title', $lesson->getTitle());
+	$query->bindParam(':subject', $lesson->getSubject());
+	$query->bindParam(':documentUrl', $lesson->getDocumentUrl());
+	$query->bindParam(':course_id', $lesson->getCourseId());
     $count = $query->execute();
     
     return $count > 0;

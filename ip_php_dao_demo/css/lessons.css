@@ -9,3 +9,53 @@
 #lessonView .questions {
 	list-style: none;
 }
+
+/* ====================================================== LessonCreateView ============================================= */
+#lessonCreate #courseCreationForm {
+	width: 100%!important;
+	max-width: 500px!important;
+}
+
+#lessonCreate fieldset {
+	border: none;
+}
+
+#lessonCreate  legend {
+	border-bottom: 2px dashed #FF6633;
+	text-align: center;
+	width: 100%;
+}
+
+#lessonCreate input {
+	width: 300px;
+}
+
+textarea {
+	background-color:#FFF3F3;
+	padding: 3px;
+	border: 1px solid #F5C5C5;
+	border-radius: 5px;
+	width: 300px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	box-shadow: 1px 1px 2px #FF9966 inset;
+}
+
+#lessonCreate input[type=button], #lessonCreate input[type=submit] {
+	width: 100px;
+	margin-left: 5px;
+	box-shadow: 1px 1px 1px #FF9966;
+	cursor: pointer;
+	margin-bottom: 5px!important;
+	margin-top: 10px!important;
+	text-decoration: none!important;
+}
+
+#lessonCreate input[type=button]:hover, #lessonCreate input[type=submit]:hover {
+	background-color: #EF8956!important;
+	color: white;
+}
+
+#lessonCreate a {
+	text-decoration: none;
+}

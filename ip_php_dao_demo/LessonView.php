@@ -71,7 +71,7 @@ class LessonView extends LayoutView {
 		
 		if ( $this->data['userType'] === 'teacher') {
 			//a teacher can create lessons in the course
-			$string = $string . '<a href="index_router.php?page=createLesson" class="button">Add a lesson</a>';
+			$string = $string . '<a href="index_router.php?page=createLesson&id='.$_GET['id'].'" class="button">Add a lesson</a>';
 		}
 		
 		$string = $string . '</div>';
