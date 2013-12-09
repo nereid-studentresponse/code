@@ -76,7 +76,10 @@ class LessonController {
 	$dbc = DB::withConfig();
 	$ldao = new LessonDAO($dbc);
 		
-	$newLesson = new Lesson(null, $_POST["title"], $_POST["subject"], null, 1);
+	// handle file
+    move_uploaded_file($_FILES["file"]["tmp_name"], "files/" . $_FILES["file"]["name"]);
+		
+	$newLesson = new Lesson(null, $_POST["title"], $_POST["subject"], "files/".$_FILES["file"]["name"], 1);
 	
 	$ldao->insert($newLesson);
 
