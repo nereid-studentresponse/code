@@ -65,7 +65,7 @@ class LessonView extends LayoutView {
 					$string = $string . '<ul class="questions">';
 					if ( $this->data['questions'][$counter]['unanswered'] ) {
 						foreach ($this->data['questions'][$counter]['unanswered'] as &$question) {
-							$string = $string . '<li><a href="index_router.php?page=fQuestion&qid='.$question->getId().'">'.$question->getTitle().'</a></li>';
+							$string = $string . '<li><a href="index_router.php?page=questionDetails&qid='.$question->getId().'">'.$question->getTitle().'</a></li>';
 						}
 						
 					} else {

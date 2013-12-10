@@ -10,6 +10,7 @@ require_once "LessonView.php";
 require_once "CourseCreateView.php";
 require_once "LessonCreateView.php";
 require_once "QuestionCreateView.php";
+require_once "QuestionDetailsView.php";
 require_once "FreeQuestionView.php";
 
 
@@ -68,8 +69,12 @@ if (!empty($page)) {
         'fQuestion' => array('view' => 'FreeQuestionView', 
                               'controller' => 'QuestionController', 
                               'action' => 'fQuestionIndex',
-                              'auth' => true)
-    );
+                              'auth' => true),
+		'questionDetails' => array('view' => 'QuestionDetailsView', 
+                              'controller' => 'QuestionController', 
+                              'action' => 'questionDetails',
+                              'auth' => true),
+	);
     
     // array for the post actions (i.e. usually submit information)
     $post = array(

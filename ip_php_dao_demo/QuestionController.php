@@ -138,7 +138,11 @@ class QuestionController {
 	
 	//redirection towards the lessons page related to the course
 	header('Location: index_router.php?page=lessons&id='.$_GET["cid"]);
-  }	
+  }
+
+	public function questionDetails() {
+		//displays the page questionDetailsView
+	}
   
  }
 
