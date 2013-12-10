@@ -32,8 +32,6 @@ class FreeQuestionDAO {
   }
 
   function insert($fquestion) {
-   
-
     $dbConnection=$this->dbConnect();
     $query=$dbConnection->prepare("INSERT INTO `freequestion` (`title`, `correction`, `id_lesson`) VALUES ( :title, :correction, :id_lesson) ");
     $query->bindParam(':title', $fquestion->getTitle());

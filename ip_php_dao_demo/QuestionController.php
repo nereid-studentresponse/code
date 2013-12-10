@@ -23,7 +23,6 @@ class QuestionController {
   }
   
   public function createFreeQuestion() {
-   
     $dbc = DB::withConfig();
     
     $dao = new FreeQuestionDAO($dbc);
@@ -127,6 +126,15 @@ class QuestionController {
   
   public function questionCreatePost() {
 	//handles the post request
+	
+	$dbc = DB::withConfig();
+    
+    $dao = new FreeQuestionDAO($dbc);
+    $fquestion = new FreeQuestion(null, $_POST["title"],$_POST["correction"],$_GET["lid"]);
+    $ok = $dao->insert($fquestion);
+       
+    $data = array( "ok" => $ok);
+    $this->view->setData($data);
 	
 	//redirection towards the lessons page related to the course
 	header('Location: index_router.php?page=lessons&id='.$_GET["cid"]);

@@ -19,21 +19,16 @@ class QuestionCreateView extends LayoutView {
 	
 	//enroll course + general structure
 	$string = '<div id="questionCreate">
-					<form enctype="multipart/form-data" name="create" action="index_router.php?page=createQuestion&cid='.$_GET['cid'].'&lid='.$_GET["lid"].'" method="post" id="questionCreationForm" class="form">
+					<form name="create" action="index_router.php?page=createQuestion&cid='.$_GET['cid'].'&lid='.$_GET["lid"].'" method="post" id="questionCreationForm" class="form">
 						<fieldset id="globalInformation">
-							<legend>Course creation : </legend>
+							<legend>Question creation : </legend>
 							<div id="title" class="formBlock">
 								<label for="title">Title :</label>
 								<input type="text" name="title" />
 							</div>
-							<div id="subject" class="formBlock">
-								<label for="subject">Subject :</label>
-								<textarea cols="40" rows="5" name="subject" id="subject"></textarea>
-							</div>
-							<div id="file" class="formBlock">
-								<input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-								<label for="file">File :</label>
-								<input name="file" type="file" />
+							<div id="correction" class="formBlock">
+								<label for="correction">Correction :</label>
+								<textarea cols="40" rows="5" name="correction" id="correction"></textarea>
 							</div>
 						</fieldset>
 						
