@@ -83,9 +83,11 @@ class LessonController {
 	$ldao = new LessonDAO($dbc);
 		
 	// handle file
-    move_uploaded_file($_FILES["file"]["tmp_name"], "files/" . $_FILES["file"]["name"]);
+	$new_name = 'document_' . date('Y-m-d-H-i-s') . '_' . uniqid();
+	$extension = substr(strrchr($_FILES["file"][name], "."),1);
+    move_uploaded_file($_FILES["file"]["tmp_name"], "files/" . $new_name . "." . $extension);
 		
-	$newLesson = new Lesson(null, $_POST["title"], $_POST["subject"], "files/".$_FILES["file"]["name"], 1);
+	$newLesson = new Lesson(null, $_POST["title"], $_POST["subject"], "files/". $new_name . "." .$extension, 1);
 	
 	$ldao->insert($newLesson);
 
