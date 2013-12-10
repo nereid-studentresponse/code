@@ -9,6 +9,7 @@ require_once "LoggedOutView.php";
 require_once "LessonView.php";
 require_once "CourseCreateView.php";
 require_once "LessonCreateView.php";
+require_once "QuestionCreateView.php";
 require_once "FreeQuestionView.php";
 
 
@@ -16,6 +17,7 @@ require_once "FreeQuestionView.php";
 require_once "PersonController.php";
 require_once "CourseController.php";
 require_once "LessonController.php";
+require_once "QuestionController.php";
 
 $page = $_GET['page'];
 if (!empty($page)) {
@@ -50,6 +52,10 @@ if (!empty($page)) {
 		'createLesson' => array('view' => 'LessonCreateView', 
                                 'controller' => 'LessonController', 
                                 'action' => 'lessonCreate',
+                                'auth' => true),
+		'createQuestion' => array('view' => 'QuestionCreateView', 
+                                'controller' => 'QuestionController', 
+                                'action' => 'questionCreate',
                                 'auth' => true),
         'logout' => array('view' => 'LoggedOutView', 
                               'controller' => 'PersonController', 
@@ -86,6 +92,10 @@ if (!empty($page)) {
 		'createLesson' => array('view' => 'LessonCreateView', 
                                 'controller' => 'LessonController', 
                                 'action' => 'lessonCreatePost',
+                                'auth' => true),
+		'createQuestion' => array('view' => 'QuestionCreateView', 
+                                'controller' => 'QuestionController', 
+                                'action' => 'questionCreatePost',
                                 'auth' => true),
         'answer' => array('view' => 'FreeQuestionView', 
                               'controller' => 'QuestionController', 

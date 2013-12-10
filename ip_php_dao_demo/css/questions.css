@@ -1,50 +1,20 @@
-#lessonView {
-	text-align: left!important;
-}
-
-#lessonView table {
-	
-}
-
-#lessonView .questions {
-	list-style: none;
-}
-
-#lessonView #questions {
-	text-align: left;
-}
-
-.createQuestion {
-	padding: 3px 0px;
-	margin-top: 10px;
-	padding-left: 30px;
-	background-image: url('./images/add-icon.png');
-	background-repeat: no-repeat;
-	background-size: contain;
-}
-
-.createQuestionA {
-	text-decoration: none;
-	color: black;
-}
-
 /* ====================================================== LessonCreateView ============================================= */
-#lessonCreate #courseCreationForm {
+#questionCreate #questionCreationForm {
 	width: 100%!important;
 	max-width: 500px!important;
 }
 
-#lessonCreate fieldset {
+#questionCreate fieldset {
 	border: none;
 }
 
-#lessonCreate  legend {
+#questionCreate  legend {
 	border-bottom: 2px dashed #FF6633;
 	text-align: center;
 	width: 100%;
 }
 
-#lessonCreate input {
+#questionCreate input {
 	width: 300px;
 }
 
@@ -59,7 +29,7 @@ textarea {
 	box-shadow: 1px 1px 2px #FF9966 inset;
 }
 
-#lessonCreate input[type=button], #lessonCreate input[type=submit] {
+#questionCreate input[type=button], #questionCreate input[type=submit] {
 	width: 100px;
 	margin-left: 5px;
 	box-shadow: 1px 1px 1px #FF9966;
@@ -69,11 +39,11 @@ textarea {
 	text-decoration: none!important;
 }
 
-#lessonCreate input[type=button]:hover, #lessonCreate input[type=submit]:hover {
+#questionCreate input[type=button]:hover, #questionCreate input[type=submit]:hover {
 	background-color: #EF8956!important;
 	color: white;
 }
 
-#lessonCreate a {
+#questionCreate a {
 	text-decoration: none;
 }

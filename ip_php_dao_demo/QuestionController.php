@@ -121,6 +121,17 @@ class QuestionController {
     $this->view->setData($data);
   }
   
+  public function questionCreate() {
+	//displays the page questionCreateView
+  }	
+  
+  public function questionCreatePost() {
+	//handles the post request
+	
+	//redirection towards the lessons page related to the course
+	header('Location: index_router.php?page=lessons&id='.$_GET["cid"]);
+  }	
+  
  }
 
 ?>

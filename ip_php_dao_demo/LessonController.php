@@ -83,7 +83,7 @@ class LessonController {
 	
 	$ldao->insert($newLesson);
 
-    //redirection towards the course page
+    //redirection towards the lessons page related to the course
 	header('Location: index_router.php?page=lessons&id='.$_GET["id"]);
   }
   

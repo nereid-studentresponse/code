@@ -47,15 +47,36 @@ class LessonView extends LayoutView {
 				$string = $string . '</td>
 						<td>';
 				
-				if ( $this->data['questions'][$counter]['unanswered'] ) {
-					$string = $string . '<ul class="questions">';
-					foreach ($this->data['questions'][$counter]['unanswered'] as &$question) {
-						$string = $string . '<li><a href="index_router.php?page=fQuestion&qid='.$question->getId().'">'.$question->getTitle().'</a></li>';
+				//questions
+				if ( $this->data['userType'] == 'student' ) {
+					//student : only unanswered questions. Each question links to the answer page
+					if ( $this->data['questions'][$counter]['unanswered'] ) {
+						$string = $string . '<ul class="questions">';
+						foreach ($this->data['questions'][$counter]['unanswered'] as &$question) {
+							$string = $string . '<li><a href="index_router.php?page=fQuestion&qid='.$question->getId().'">'.$question->getTitle().'</a></li>';
+						}
+						$string = $string . '</ul>';
+					} else {
+						$string = $string . 'No question';
 					}
-					$string = $string . '</ul>';
+					
 				} else {
-					$string = $string . 'No question';
+					//teacher : all questions. Each question links to a page displaying information such as number of answers and answsers' details
+					$string = $string . '<ul class="questions">';
+					if ( $this->data['questions'][$counter]['unanswered'] ) {
+						foreach ($this->data['questions'][$counter]['unanswered'] as &$question) {
+							$string = $string . '<li><a href="index_router.php?page=fQuestion&qid='.$question->getId().'">'.$question->getTitle().'</a></li>';
+						}
+						
+					} else {
+						$string = $string . 'No question yet';
+					}
+					
+					// question creation
+					$string = $string . '<a href="index_router.php?page=createQuestion&cid='.$_GET['id'].'&lid='.$lesson->getId().'" class="createQuestionA"><li class="createQuestion">Add a question</li></a>';
+					$string = $string . '</ul>';
 				}
+
 				
 				$string = $string . '</td>
 					</tr>';
