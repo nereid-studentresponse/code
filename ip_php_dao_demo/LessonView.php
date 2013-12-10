@@ -63,9 +63,9 @@ class LessonView extends LayoutView {
 				} else {
 					//teacher : all questions. Each question links to a page displaying information such as number of answers and answsers' details
 					$string = $string . '<ul class="questions">';
-					if ( $this->data['questions'][$counter]['unanswered'] ) {
-						foreach ($this->data['questions'][$counter]['unanswered'] as &$question) {
-							$string = $string . '<li><a href="index_router.php?page=questionDetails&qid='.$question->getId().'">'.$question->getTitle().'</a></li>';
+					if ( $this->data['questions'][$counter] ) {
+						foreach ($this->data['questions'][$counter] as &$question) {
+							$string = $string . '<li><a href="index_router.php?page=questionDetails&cid='.$_GET['id'].'&qid='.$question->getId().'">'.$question->getTitle().'</a></li>';
 						}
 						
 					} else {

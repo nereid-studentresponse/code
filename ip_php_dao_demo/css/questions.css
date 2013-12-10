@@ -1,4 +1,15 @@
-/* ====================================================== LessonCreateView ============================================= */
+/* ====================================================== QuestionDetailsView ============================================= */
+
+#questionDetails > div {
+	text-align: left;
+	padding: 10px;
+}
+
+#questionDetails h3 {
+	margin: 0px!important;
+}
+
+/* ====================================================== QuestionCreateView ============================================= */
 #questionCreate #questionCreationForm {
 	width: 100%!important;
 	max-width: 500px!important;

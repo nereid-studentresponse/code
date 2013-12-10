@@ -40,25 +40,31 @@ class LessonController {
     $courseId = $_GET["id"];
 	$user = $_SESSION['user'];
 	
-	// if the current logged in user is a student
-    if ($user instanceof Student) {
-		$userType = "student";
-    } else {
-		$userType = "teacher";
-	}
-	
-    $dbc = DB::withConfig();
+	$dbc = DB::withConfig();
     $dao = new LessonDAO($dbc);
     $questionController = new QuestionController(null);
     
     $lessons = $dao->getByCourse($courseId);
-    
-    $questions = array();
-    $counter = 0;
-    foreach ($lessons as &$lesson) {
-        $questions[$counter] = $questionController->studentQuestions($lesson->getId(), $user->getId());
-        $counter++;
-    }
+	
+	$questions = array();
+	
+	// if the current logged in user is a student
+    if ($user instanceof Student) {
+		$userType = "student";
+		
+		$counter = 0;
+		foreach ($lessons as &$lesson) {
+			$questions[$counter] = $questionController->studentQuestions($lesson->getId(), $user->getId());
+			$counter++;
+		}
+    } else {
+		$userType = "teacher";
+		$counter = 0;
+		foreach ($lessons as &$lesson) {
+			$questions[$counter] = $questionController->lessonQuestions($lesson->getId());
+			$counter++;
+		}
+	}
     
     $data = array( "lessons" => $lessons, "questions" => $questions, "userType" => $userType );
     $this->view->setData($data);

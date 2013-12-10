@@ -56,7 +56,9 @@ class QuestionController {
 #    $this->data["answer"] = $answer;
     $this->data["ok"] = $ok;
     $this->view->setData($this->data);
-    
+	
+	//redirection
+    //header('Location: index_router.php?page=lessons&id='.$_GET["cid"]);
   }
 
   public function fQuestionIndex() {
@@ -79,6 +81,18 @@ class QuestionController {
     
     $data = array( "questions" => $questions);
     $this->view->setData($data);
+  }
+  
+  /**
+  * Returns all the questions created in the lesson on an array
+  **/
+  public function lessonQuestions($lessonId) {
+    $dbc = DB::withConfig();
+    $dao = new FreeQuestionDAO($dbc);
+    
+    $questions = $dao->getByLesson($lessonId);
+    
+    return $questions;
   }
   
   public function studentQuestionsIndex() {
@@ -142,6 +156,19 @@ class QuestionController {
 
 	public function questionDetails() {
 		//displays the page questionDetailsView
+		$questionId = $_GET["qid"];
+		
+		
+		$dbc = DB::withConfig();
+		$qdao = new FreeQuestionDAO($dbc);
+		$adao = new FreeAnswerDAO($dbc);
+		
+		//info on question
+		$question = $qdao->get($questionId);
+		$answers = $adao->getByQuestion($questionId);
+		
+		$data = array("question" => $question, "answers" => $answers);
+		$this->view->setData($data);
 	}
   
  }

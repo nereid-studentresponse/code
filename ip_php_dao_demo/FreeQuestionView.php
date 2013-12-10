@@ -42,7 +42,7 @@ class FreeQuestionView extends LayoutView
     $content = 
       '<div id="question">
         <p>'.$q->getTitle().'</p>
-        <p>'.$q->getId().'</p>
+        //<p>'.$q->getId().'</p>
         '.$form.'
           <textarea name="freeAnswer" rows="20" cols="80">
             '.$answerText.'
