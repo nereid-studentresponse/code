@@ -131,21 +131,6 @@ CREATE TABLE IF NOT EXISTS `note` (
 
 -- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `option`
---
-
-CREATE TABLE IF NOT EXISTS `option` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `correct` tinyint(1) NOT NULL,
-  `id_chquestion` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`,`id_chquestion`),
-  KEY `id_chquestion` (`id_chquestion`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `school`
@@ -235,6 +220,57 @@ CREATE TABLE IF NOT EXISTS `teacherof` (
   KEY `id_teacher_2` (`id_teacher`,`id_school`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `choiceanswer`
+--
+
+CREATE TABLE IF NOT EXISTS `choiceanswer` (
+  `id_choice` int(11) NOT NULL,
+  `id_student` int(11) NOT NULL,
+  UNIQUE KEY `id` (`id_choice`,`id_student`),
+  KEY `id_choice` (`id_choice`),
+  KEY `id_student` (`id_student`)
+  
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `choice`
+--
+
+CREATE TABLE IF NOT EXISTS `choice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `option_text` varchar(255) NOT NULL,
+  `id_question` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_question` (`id_question`)
+  
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `choicequestion`
+--
+
+CREATE TABLE IF NOT EXISTS `choicequestion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `id_correct_choice` int(11) NOT NULL,
+  `id_lesson` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_correct_choice` (`id_correct_choice`),
+  KEY `id_lesson` (`id_lesson`)
+  
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ;
+
+-- --------------------------------------------------------
+
+
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -286,6 +322,27 @@ ALTER TABLE `note`
 ALTER TABLE `studentof`
   ADD CONSTRAINT `studentof_ibfk_1` FOREIGN KEY (`id_student`) REFERENCES `student` (`id`),
   ADD CONSTRAINT `studentof_ibfk_2` FOREIGN KEY (`id_school`) REFERENCES `school` (`id`);
+  
+--
+-- Filtros para la tabla `choiceanswer`
+--
+ALTER TABLE `choiceanswer`
+  ADD CONSTRAINT `choiceanswer_ibfk_1` FOREIGN KEY (`id_choice`) REFERENCES `choice` (`id`),
+  ADD CONSTRAINT `choiceanswer_ibfk_2` FOREIGN KEY (`id_student`) REFERENCES `student` (`id`);
+  
+--
+-- Filtros para la tabla `choice`
+--
+ALTER TABLE `choice`
+  ADD CONSTRAINT `choice_ibfk_1` FOREIGN KEY (`id_question`) REFERENCES `choicequestion` (`id`);
+
+  
+--
+-- Filtros para la tabla `choiceanswer`
+--
+ALTER TABLE `choicequestion`
+  ADD CONSTRAINT `choicequestion_ibfk_1` FOREIGN KEY (`id_correct_choice`) REFERENCES `choice` (`id`),
+  ADD CONSTRAINT `choicequestion_ibfk_2` FOREIGN KEY (`id_lesson`) REFERENCES `lesson` (`id`);
 
 --
 -- Filtros para la tabla `teacherof`
