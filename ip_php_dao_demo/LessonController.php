@@ -87,7 +87,7 @@ class LessonController {
 	$extension = substr(strrchr($_FILES["file"][name], "."),1);
     move_uploaded_file($_FILES["file"]["tmp_name"], "files/" . $new_name . "." . $extension);
 		
-	$newLesson = new Lesson(null, $_POST["title"], $_POST["subject"], "files/". $new_name . "." .$extension, 1);
+	$newLesson = new Lesson(null, $_POST["title"], $_POST["subject"], "files/". $new_name . "." .$extension, $_GET["id"]);
 	
 	$ldao->insert($newLesson);
 
