@@ -33,11 +33,11 @@
 							</div>
 							<div id="passwordLabel" class="formBlock">
 								<label for="password">Password :</label>
-								<input type="password" name="password" />
+								<input type="password" id="password" name="password" />
 							</div>
 							<div id="password2Label" class="formBlock">
 								<label for="password2">Confirm password :</label>
-								<input type="password" name="password2" />
+								<input type="password" id="password2" name="password2" />
 							</div>
 						</fieldset>
 						<fieldset id="globalInformation">
