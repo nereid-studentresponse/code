@@ -22,6 +22,8 @@ legend {
 	border-bottom: 2px dashed #FF6633;
 	text-align: center;
 	width: 100%;
+	font-weight: bold;
+	padding-bottom: 2px;
 }
 
 input {
@@ -32,11 +34,16 @@ input {
 	width: 250px;
 	margin: 5px auto;
 	box-shadow: 1px 1px 2px #FF9966 inset;
+	font-weight: bold;
 }
 
 select {
 	width: 250px;
 }
+
+label.error {
+	color: red;
+} 
 
 .radio {
 	width: 250px;

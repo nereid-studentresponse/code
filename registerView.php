@@ -35,7 +35,7 @@
 								<label for="password">Password :</label>
 								<input type="password" name="password" />
 							</div>
-							<div id="mailLabel" class="formBlock">
+							<div id="password2Label" class="formBlock">
 								<label for="password2">Confirm password :</label>
 								<input type="password" name="password2" />
 							</div>
