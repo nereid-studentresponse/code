@@ -26,7 +26,7 @@
 				<div id="authentication">
 					<form action="register.php" method="post" id="registrationForm">
 						<fieldset id="globalInformation">
-							<legend>Registering : </legend>
+							<legend>Registering</legend>
 							<div id="mailLabel" class="formBlock">
 								<label for="mail">Email :</label>
 								<input type="text" name="mail" />
@@ -41,7 +41,7 @@
 							</div>
 						</fieldset>
 						<fieldset id="globalInformation">
-							<legend>Personal information : </legend>
+							<legend>Personal information</legend>
 							<div id="fistNameLabel" class="formBlock">
 								<label for="fistName">First name :</label>
 								<input type="text" name="fistName" />
@@ -73,7 +73,7 @@
 							</div>
 						</fieldset>
 						<fieldset id="globalInformation">
-							<legend>School information : </legend>
+							<legend>School information</legend>
 							<div id="countryLabel" class="formBlock">
 								<label for="country">Country :</label>
 								<select name="country" id="country" size="1"> 
