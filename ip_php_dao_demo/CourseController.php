@@ -71,7 +71,8 @@ class CourseController {
 
       $data = array( "ok" => $ok);
       $courses = $this->currentUserCourses();
-      $data = array( "courses" => $courses);
+      $data = array( "courses" => $courses, "userType" => "student");
+	  
       $this->view->setData($data);
   }
   
